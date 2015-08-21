@@ -28,16 +28,22 @@ app.config(['localStorageServiceProvider', function(localStorageServiceProvider)
   localStorageServiceProvider.setPrefix('ls');
 }]);
 
-// app.config(['$httpProvider', function($httpProvider) {
-//   $httpProvider.defaults.useXDomain = true;
-//   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-// // $httpProvider.defaults.useXDomain = true;
-// // $httpProvider.defaults.withCredentials = true;
-// // delete $httpProvider.defaults.headers.common["X-Requested-With"];
-// // $httpProvider.defaults.headers.common["Accept"] = "application/json";
-// // $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-//   }
-// ]);
+app.config(['$httpProvider', function($httpProvider) {
+  $httpProvider
+    .interceptors.push(function($q, localStorageService){
+      return {
+        request: function(config){
+          if (localStorageService.get('user') !== undefined) {
+            config.headers['token'] = localStorageService.get('user').token;
+            config.headers['email'] = localStorageService.get('user').email;
+          };
+          return config;
+        }
+      }
+    }
+    );
+  }
+]);
 
 app.config(function ($routeProvider) {
   $routeProvider

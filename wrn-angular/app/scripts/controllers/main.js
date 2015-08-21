@@ -13,6 +13,7 @@ app.controller('MainCtrl', ['Data', function (Data) {
   
   var ctrl = this;
 
+  
   var errorRsp = function(rsp){ console.log('Error' + JSON.stringify(rsp)); };
 
   var getDates = function(startDate, endDate){
@@ -25,6 +26,10 @@ app.controller('MainCtrl', ['Data', function (Data) {
     }
     return dateArray;
   };
+
+  Data.loadUser(function(user){
+    ctrl.user = user;
+  });
 
   Data.loadEntries(function(entries){
     ctrl.entries = entries;

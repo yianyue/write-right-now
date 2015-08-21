@@ -9,7 +9,7 @@ app.factory('Api', ['$resource', function($resource){
 
 app.factory('User', ['$resource', function($resource){
   return $resource('http://localhost:3000/api/user', {}, {
-    get: {method: 'GET', cache: false, isArray: false},
+    save: {method: 'POST', cache: false, isArray: false},
   });
 }]);
 
@@ -20,23 +20,10 @@ return $resource('http://localhost:3000/api/session', {}, {
   });
 }]);
 
-app.factory('Data', ['Api', 'User', function (Api, User) {
+app.factory('Data', ['Api', 'User', 'localStorageService', function (Api, User, localStorageService) {
 
-  var user;
+  var user = localStorageService.get('user');
   var entries;
-
-  function getUser(complete) {
-    User.get({},
-      function success(rsp){
-        console.log('got the user');
-        user = rsp;
-        complete(user);
-      },
-      function error(rsp){
-        console.log('Error' + JSON.stringify(rsp));
-      }
-    );
-  };
 
   function getEntries(complete) {
     Api.get({},
