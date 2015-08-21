@@ -1,6 +1,6 @@
 class Api::EntriesController < ApplicationController
 
-  # before_action :authenticate_user!
+  before_action :authenticate_user
   
   def index
     # @entries = current_user.entries.order(created_at: :desc)

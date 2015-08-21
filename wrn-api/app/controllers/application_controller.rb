@@ -3,13 +3,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  # otherwise get 'Can't verify CSRF token authenticity'
-  # protect_from_forgery unless: -> { request.format.json? }
+  def current_user
+    @current_user ||= User.find_by(token: request.headers['token'])
+  end
 
+  def authenticate_user
+    @user = User.find_by(email: request.headers["email"])
+     if @user && @user.token = request.headers["token"]
+       true
+     else
+       render nothing: true, status: 401
+     end
+  end
 
-# redirect to 
-  # def after_sign_in_path_for(resource)    
-  #   app_path
-  # end
+  helper_method :current_user, :authenticate_user
   
 end
