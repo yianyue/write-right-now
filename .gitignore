@@ -19,6 +19,7 @@ wrn-api/tmp
 # Ignore vender assets
 wrn-api/vendor
 
+# Ignore angular modules
 wrn-angular/node_modules
 wrn-angular/dist
 wrn-angular/.tmp
