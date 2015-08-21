@@ -6,18 +6,10 @@ class ApplicationController < ActionController::Base
   # otherwise get 'Can't verify CSRF token authenticity'
   # protect_from_forgery unless: -> { request.format.json? }
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
 # redirect to 
   # def after_sign_in_path_for(resource)    
   #   app_path
   # end
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :goal << :name
-    devise_parameter_sanitizer.for(:account_update) << :goal << :name
-  end
   
 end
