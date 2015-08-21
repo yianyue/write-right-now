@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    
+    # current_user.generate_token
   end
 
 end

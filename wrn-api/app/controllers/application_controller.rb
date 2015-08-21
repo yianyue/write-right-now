@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    @user = User.find_by(email: request.headers["email"])
-     if @user && @user.token = request.headers["token"]
+    @user = current_user if request.headers["token"]
+    if @user && @user.token == request.headers["token"]
        true
      else
        render nothing: true, status: 401
