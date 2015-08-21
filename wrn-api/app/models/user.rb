@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
 
   has_many :entries, dependent: :delete_all
+  
+  has_secure_password
 
-  validates :name, presence: true
-  validates :goal, numericality: { only_integer: true, greater_than: 0 }
-
+  validates :email, :firstname, :lastname, presence: true
+  validates :password, length: { in: 6..20 }, on: :create
 
 end
-
