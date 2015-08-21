@@ -26,16 +26,11 @@ app.controller('MainCtrl', ['Data', function (Data) {
     return dateArray;
   };
 
-
   Data.loadEntries(function(entries){
     ctrl.entries = entries;
     console.log(entries);
     ctrl.dates = getDates(entries[entries.length-1].created_at, entries[0].created_at);
     console.log(ctrl.dates);
-  });
-
-  Data.loadUser(function(user){
-    ctrl.user = user;
   });
 
   // max number of characters of content to show on the main page

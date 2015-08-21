@@ -8,8 +8,15 @@ app.factory('Api', ['$resource', function($resource){
 }]);
 
 app.factory('User', ['$resource', function($resource){
-  return $resource('/api/user', {}, {
+  return $resource('http://localhost:3000/api/user', {}, {
     get: {method: 'GET', cache: false, isArray: false},
+  });
+}]);
+
+app.factory('SessionService', ['$resource', function($resource){
+return $resource('http://localhost:3000/api/session', {}, {
+    login: {method: 'POST'},
+    logout: {method: 'DELETE'}
   });
 }]);
 

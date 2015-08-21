@@ -42,6 +42,14 @@ app.config(['localStorageServiceProvider', function(localStorageServiceProvider)
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
+      templateUrl: 'views/about.html',
+    })
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'SessionCtrl',
+      controllerAs: 'session'
+    })
+    .when('/entries', {
       templateUrl: 'views/main.html',
       controller: 'MainCtrl',
       controllerAs: 'main'
