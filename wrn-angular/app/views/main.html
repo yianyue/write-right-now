@@ -1,39 +1,41 @@
 <div class="container">
 
+<!-- TODO: Update User Goal -->
 <div ng-controller="UserCtrl as user">
-    <h2>{{ $root.currentUser.name }}'s Entries </h2>
+  <h2>{{ $root.currentUser.name }}'s Entries </h2>
 
-    <p>Daily goal: {{ $root.currentUser.goal }} words
-    <span class="input-btn">
-      <button class="btn" aria-pressed="false" autocomplete="off" aria-label="Edit"
-      data-toggle="collapse" data-target="#goalInput" aria-expanded="false" aria-controls="goalInput">Change Goal</button>
-    </span>
-    </p>
-    <div class="collapse" id="goalInput">
-      <div class="well">
-        <form name="goal" class="form-inline" ng-model-options="{ updateOn: 'blur' }">
-          <label for="goal">Goal</label>
-          <input name="goal"
-                class="form-control" 
-                ng-model="user.info.goal"
-                ng-change="user.updateGoal()">
-        </form>
-      </div>
+  <p>Daily goal: {{ $root.currentUser.goal }} words
+  <span class="input-btn">
+    <button class="btn" aria-pressed="false" autocomplete="off" aria-label="Edit"
+    data-toggle="collapse" data-target="#goalInput" aria-expanded="false" aria-controls="goalInput">Change Goal</button>
+  </span>
+  </p>
+
+  <div class="collapse" id="goalInput">
+    <div class="well">
+      <form name="goal" class="form-inline" ng-model-options="{ updateOn: 'blur' }">
+        <label for="goal">Goal</label>
+        <input name="goal"
+              class="form-control" 
+              ng-model="user.info.goal"
+              ng-change="user.updateGoal()">
+      </form>
     </div>
+  </div>
 </div>
 
 
-    <div class="list-group" ng-repeat="entry in main.entries | orderBy:'id':true">
-      <a class="list-group-item" ng-href="#/entries/{{ entry.id }}">
-      <h4 class="list-group-item-heading">{{ entry.created_at | date:"MMM d, y" }}</h4>
-      <div class="progress">
-        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{entry.word_count/entry.goal*100}}%">
-        <span>{{ entry.word_count }}/{{ entry.goal }}</span> words
-        </div>
-      </div>
-      <!-- not using handlebars here to display html -->
-      <p class="text-muted" ng-bind-html="entry.content | limitTo: main.previewLimit"></p>
-      </a>
+<div class="list-group" ng-repeat="entry in main.entries | orderBy:'id':true">
+  <a class="list-group-item" ng-href="#/entries/{{ entry.id }}">
+  <h4 class="list-group-item-heading">{{ entry.created_at | date:"MMM d, y" }}</h4>
+  <div class="progress">
+    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ entry.word_count >= entry.goal ? 100 : entry.word_count/entry.goal*100 }}%">
+    <span>{{ entry.word_count }}/{{ entry.goal }}</span> words
     </div>
+  </div>
+  <!-- not using handlebars here to display html -->
+  <p class="text-muted" ng-bind-html="entry.content | limitTo: main.previewLimit"></p>
+  </a>
+</div>
   
 </div>

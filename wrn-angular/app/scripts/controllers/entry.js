@@ -26,7 +26,7 @@ app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Full
     ctrl.updateEntry = function(){
       // TODO: handle error
       ctrl.currentEntry.word_count = ctrl.countWords();
-      ctrl.progress = ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100;
+      ctrl.progress = Math.round(ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100);
       Data.saveEntry(ctrl.currentEntry);
     };
 
