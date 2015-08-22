@@ -13,6 +13,7 @@ app.controller('UserCtrl', ['UserService', 'localStorageService', '$window', fun
   var ctrl = this;
   
   ctrl.register = function(){
+    // Have to send the info back with a user key, otherwise the password and password_confirmation doesn't get saved
     UserService.save({user: ctrl.info},
       function success(rsp){
         console.log('Success' + JSON.stringify(rsp));
