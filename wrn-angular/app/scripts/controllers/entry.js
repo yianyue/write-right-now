@@ -27,6 +27,14 @@ app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Full
       ctrl.currentEntry.word_count = ctrl.countWords();
       ctrl.progress = ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100;
       Data.saveEntry(ctrl.currentEntry);
+      // Data.updateEntry({id: $routeParams.id}, {entry: ctrl.currentEntry},
+      //   function success(rsp){
+      //     console.log('Success' + JSON.stringify(rsp));
+      //   },
+      //   function error(rsp){
+      //     console.log('Error' + JSON.stringify(rsp) );
+      //   }
+      // );
     };
 
     ctrl.toggleFullscreen = function(){

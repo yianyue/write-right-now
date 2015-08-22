@@ -2,7 +2,6 @@ app.factory('EntryService', ['$resource', function($resource){
   return $resource("http://localhost:3000/api/entries/:id", {}, {
     get: {method: 'GET', cache: false, isArray: true},
     getEntry: {method: 'GET', cache: false, isArray: false},
-    save: {method: 'POST', cache: false, isArray: false},
     update: {method: 'PUT', cache: false, isArray: false},
   });
 }]);
@@ -38,8 +37,15 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', funct
     );
   };
 
-  function updateEntry(complete){
-EntryService.update
+  function lsUpdateEntry(entry){
+    var i = 0;
+      do {
+        if (entries[i].id == entry.id){
+          entries[i] = entry;
+        }
+        i ++;
+      } while (!entry && i < entries.length);
+      localStorageService.set('entries', entries);
   }
   
   return {
@@ -60,12 +66,15 @@ EntryService.update
       localStorageService.set('user', user);
     },
     getEntry: EntryService.getEntry,
-    saveEntry: function(complete){
-      if(entry){
-        complete(entry);
-      } else {
-        updateEntry(complete);
-      }
+    saveEntry: function(entry){
+      EntryService.update({id: entry.id}, {entry: entry},
+        function success(rsp){
+          console.log('Success' + JSON.stringify(rsp));
+          lsUpdateEntry(rsp);
+        },
+        function error(rsp){
+          console.log('Error' + JSON.stringify(rsp) );
+      });
     },
     updateUser: function(user){
       // localStorageService.set('user', user);
