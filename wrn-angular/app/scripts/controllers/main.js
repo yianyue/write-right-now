@@ -26,27 +26,12 @@ app.controller('MainCtrl', ['Data', function (Data) {
     return dateArray;
   };
 
-  ctrl.user = Data.loadUser();
-
   Data.loadEntries(function(entries){
     ctrl.entries = entries;
     // ctrl.dates = getDates(entries[entries.length-1].created_at, entries[0].created_at);
-    console.log(ctrl.entries);
   });
 
   // max number of characters of content to show on the main page
   ctrl.previewLimit = 100;
-
-  // add and remove entry will not be available to the user.
-  ctrl.addEntry = function () {
-    // TODO: create entry and immediately display it; update when the response comes back
-    var newEntry = Data.addEntry({},
-      function success(rsp){
-        console.log('Success' + JSON.stringify(rsp));
-        ctrl.entries.push(rsp);
-      },
-      errorRsp
-    );
-  };
 
 }]);

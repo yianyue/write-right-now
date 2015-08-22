@@ -19,16 +19,20 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <nav class="navbar navbar-default navbar-fixed-top">
-  <a class="navbar-brand" href="/#/">Write Right Now</a>
-  <div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="/#/login">Login</a></li>
-        <li><a href="" ng-controller="SessionCtrl as session" ng-click="session.logout()">Logout</a></li>
-        <li><a href="/#/register">Register</a></li>
-    </ul>
-  </div><!-- container-fluid -->
-</nav>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="ViewCtrl" ng-class="navigationClass">
+      <a class="navbar-brand" href="/#/">Write Right Now</a>
+      <div class="container-fluid">
+        <div ng-controller="UserCtrl as user">
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-hide="$root.currentUser"><a href="/#/login">Login</a></li>
+            <li ng-hide="$root.currentUser"><a href="/#/register">Register</a></li>
+            <li ng-hide="!$root.currentUser"><a href="">{{$root.currentUser.name}}</a></li>
+            <li ng-hide="!$root.currentUser"><a href="" ng-click="user.logout()">Logout</a></li>
+        </ul>
+        </div>      
+      </div><!-- container-fluid -->
+    </nav>
 
     <div>
         <div ng-view=""></div>
@@ -55,7 +59,6 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/session.js"></script>
         <script src="scripts/controllers/user.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/entry.js"></script>

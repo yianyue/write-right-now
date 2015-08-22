@@ -52,8 +52,8 @@ app.config(function ($routeProvider) {
     })
     .when('/login', {
       templateUrl: 'views/login.html',
-      controller: 'SessionCtrl',
-      controllerAs: 'session'
+      controller: 'UserCtrl',
+      controllerAs: 'user'
     })
     .when('/register', {
       templateUrl: 'views/register.html',
@@ -68,9 +68,18 @@ app.config(function ($routeProvider) {
     .when('/entries/:id', {
       templateUrl: 'views/entry.html',
       controller: 'EntryCtrl',
-      controllerAs: 'entry'
+      controllerAs: 'entry',
+      navigationClass: 'fs-navbar'
     })
     .otherwise({
       redirectTo: '/'
     });
 });
+
+// ViewCtrl for the navigation bar
+app.controller("ViewCtrl", function($scope) {
+  $scope.$on("$routeChangeSuccess", function(event, current, previous) {
+    $scope.navigationClass = current.$$route.navigationClass;
+  });
+});
+

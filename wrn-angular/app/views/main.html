@@ -1,8 +1,9 @@
 <div class="container">
 
-    <h2>{{ main.user.name }}'s Entries 
+<div ng-controller="UserCtrl as user">
+    <h2>{{ $root.currentUser.name }}'s Entries </h2>
 
-    <p>Daily goal: {{ main.user.goal }} words
+    <p>Daily goal: {{ $root.currentUser.goal }} words
     <span class="input-btn">
       <button class="btn" aria-pressed="false" autocomplete="off" aria-label="Edit"
       data-toggle="collapse" data-target="#goalInput" aria-expanded="false" aria-controls="goalInput">Change Goal</button>
@@ -14,11 +15,13 @@
           <label for="goal">Goal</label>
           <input name="goal"
                 class="form-control" 
-                ng-model="main.user.goal"
-                ng-change="main.updateGoal()">
+                ng-model="user.info.goal"
+                ng-change="user.updateGoal()">
         </form>
       </div>
     </div>
+</div>
+
 
     <div class="list-group" ng-repeat="entry in main.entries | orderBy:'id':true">
       <a class="list-group-item" ng-href="#/entries/{{ entry.id }}">

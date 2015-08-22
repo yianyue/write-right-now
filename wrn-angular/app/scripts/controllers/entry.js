@@ -11,16 +11,11 @@
 
 // TODO: figure out why document.element.requestFullscreen etc. didn't work
 // array ensures angular can still find the dependencies after minification
-app.controller('EntryCtrl', ['$routeParams', '$scope', 'Data', 'Fullscreen', 
-  function($routeParams, $scope, Data, Fullscreen) {
+app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Fullscreen', 
+  function($routeParams, $location, $scope, Data, Fullscreen) {
 
     var ctrl = this;
 
-    // can only trigger fullscreen from user controlled gestures.
-    $('nav').delay(2000).queue(function(){
-      $(this).addClass('fs-navbar');
-    });
-    
     ctrl.countWords = function() {
       // replace all html tags with space
       var words = ctrl.currentEntry.content.replace(/<.*?>/g, ' ');
@@ -30,14 +25,8 @@ app.controller('EntryCtrl', ['$routeParams', '$scope', 'Data', 'Fullscreen',
 
     ctrl.updateEntry = function(){
       ctrl.currentEntry.word_count = ctrl.countWords();
-      Data.updateEntry({id: $routeParams.id}, {entry: ctrl.currentEntry},
-        function success(rsp){
-          console.log('Success' + JSON.stringify(rsp));
-        },
-        function error(rsp){
-          console.log('Error' + JSON.stringify(rsp) );
-        }
-      );
+      ctrl.progress = ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100;
+      Data.saveEntry(ctrl.currentEntry);
     };
 
     ctrl.toggleFullscreen = function(){
@@ -56,8 +45,8 @@ app.controller('EntryCtrl', ['$routeParams', '$scope', 'Data', 'Fullscreen',
       var today = new Date();
       Data.getEntry({id: $routeParams.id},
         function success(rsp){
-          console.log('Success' + JSON.stringify(rsp));
           ctrl.currentEntry = rsp;
+          ctrl.progress = ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100;
           var entryDate = new Date(ctrl.currentEntry.created_at);
           if (entryDate.setHours(0,0,0,0) == today.setHours(0,0,0,0)){
             ctrl.editor.enable();

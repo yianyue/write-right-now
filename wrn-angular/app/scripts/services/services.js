@@ -16,14 +16,13 @@ app.factory('UserService', ['$resource', function($resource){
 
 app.factory('SessionService', ['$resource', function($resource){
 return $resource('http://localhost:3000/api/session', {}, {
-    login: {method: 'POST'},
-    logout: {method: 'DELETE'}
+    login: {method: 'POST', cache: false, isArray: false},
+    logout: {method: 'DELETE', cache: false, isArray: false}
   });
 }]);
 
 app.factory('Data', ['EntryService', 'UserService', 'localStorageService', function (EntryService, UserService, localStorageService) {
 
-  var user = localStorageService.get('user');
   var entries = localStorageService.get('entries');
 
   function getEntries(complete) {
@@ -38,6 +37,10 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', funct
       }
     );
   };
+
+  function updateEntry(complete){
+EntryService.update
+  }
   
   return {
     loadEntries: function(complete){
@@ -47,22 +50,26 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', funct
         getEntries(complete);
       }
     },
-    // loadUser: function(complete){
-    //   if (user) {
-    //     complete(user);
-    //   } else {
-    //     getUser(complete);
-    //   }
-    // },
     loadUser: function(){
-      return user;
+      return localStorageService.get('user');;
+    },
+    clear: function(){
+      localStorageService.clearAll();
+    },
+    setUser: function(user){
+      localStorageService.set('user', user);
     },
     getEntry: EntryService.getEntry,
-    updateEntry: EntryService.update,
-    addEntry: EntryService.save,
+    saveEntry: function(complete){
+      if(entry){
+        complete(entry);
+      } else {
+        updateEntry(complete);
+      }
+    },
     updateUser: function(user){
       // localStorageService.set('user', user);
-    },
+    }
   };
 
 }]);

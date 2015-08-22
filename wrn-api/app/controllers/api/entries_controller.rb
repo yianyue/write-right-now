@@ -12,7 +12,7 @@ class Api::EntriesController < ApplicationController
 
   def show
     @entry = current_user.entries    
-    @entry.find(params[:id])
+    @entry = @entry.find(params[:id])
     if @entry
       render json: @entry
     else
