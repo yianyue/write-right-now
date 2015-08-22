@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   has_secure_password
 
   validates :email, :name, presence: true
-  validates :password, length: { in: 6..20 }, on: :create
   validates :goal, numericality: { only_integer: true, greater_than: 0 }
 
   after_create :generate_token

@@ -12,7 +12,6 @@
 app.controller('MainCtrl', ['Data', function (Data) {
   
   var ctrl = this;
-
   
   var errorRsp = function(rsp){ console.log('Error' + JSON.stringify(rsp)); };
 
@@ -27,15 +26,12 @@ app.controller('MainCtrl', ['Data', function (Data) {
     return dateArray;
   };
 
-  Data.loadUser(function(user){
-    ctrl.user = user;
-  });
+  ctrl.user = Data.loadUser();
 
   Data.loadEntries(function(entries){
     ctrl.entries = entries;
-    console.log(entries);
-    ctrl.dates = getDates(entries[entries.length-1].created_at, entries[0].created_at);
-    console.log(ctrl.dates);
+    // ctrl.dates = getDates(entries[entries.length-1].created_at, entries[0].created_at);
+    console.log(ctrl.entries);
   });
 
   // max number of characters of content to show on the main page

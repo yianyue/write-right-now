@@ -33,7 +33,7 @@ app.config(['$httpProvider', function($httpProvider) {
     .interceptors.push(function($q, localStorageService){
       return {
         request: function(config){
-          if (localStorageService.get('user') !== undefined) {
+          if (localStorageService.get('user')) {
             config.headers['token'] = localStorageService.get('user').token;
             config.headers['email'] = localStorageService.get('user').email;
           };
@@ -54,6 +54,11 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/login.html',
       controller: 'SessionCtrl',
       controllerAs: 'session'
+    })
+    .when('/register', {
+      templateUrl: 'views/register.html',
+      controller: 'UserCtrl',
+      controllerAs: 'user'
     })
     .when('/entries', {
       templateUrl: 'views/main.html',

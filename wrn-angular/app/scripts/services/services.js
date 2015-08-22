@@ -1,4 +1,4 @@
-app.factory('Api', ['$resource', function($resource){
+app.factory('EntryService', ['$resource', function($resource){
   return $resource("http://localhost:3000/api/entries/:id", {}, {
     get: {method: 'GET', cache: false, isArray: true},
     getEntry: {method: 'GET', cache: false, isArray: false},
@@ -7,9 +7,10 @@ app.factory('Api', ['$resource', function($resource){
   });
 }]);
 
-app.factory('User', ['$resource', function($resource){
-  return $resource('http://localhost:3000/api/user', {}, {
+app.factory('UserService', ['$resource', function($resource){
+  return $resource('http://localhost:3000/api/users', {}, {
     save: {method: 'POST', cache: false, isArray: false},
+    update: {method: 'PUT', cache: false, isArray: false},
   });
 }]);
 
@@ -20,16 +21,16 @@ return $resource('http://localhost:3000/api/session', {}, {
   });
 }]);
 
-app.factory('Data', ['Api', 'User', 'localStorageService', function (Api, User, localStorageService) {
+app.factory('Data', ['EntryService', 'UserService', 'localStorageService', function (EntryService, UserService, localStorageService) {
 
   var user = localStorageService.get('user');
-  var entries;
+  var entries = localStorageService.get('entries');
 
   function getEntries(complete) {
-    Api.get({},
+    EntryService.get({},
       function success(rsp){
-        console.log('got the entries');
         entries = rsp;
+        localStorageService.set('entries', rsp)
         complete(entries);
       },
       function error(rsp){
@@ -37,8 +38,6 @@ app.factory('Data', ['Api', 'User', 'localStorageService', function (Api, User, 
       }
     );
   };
-
-  // var data = data || Api.get({}, success, error);
   
   return {
     loadEntries: function(complete){
@@ -48,88 +47,22 @@ app.factory('Data', ['Api', 'User', 'localStorageService', function (Api, User, 
         getEntries(complete);
       }
     },
-    loadUser: function(complete){
-      if (user) {
-        complete(user);
-      } else {
-        getUser(complete);
-      }
+    // loadUser: function(complete){
+    //   if (user) {
+    //     complete(user);
+    //   } else {
+    //     getUser(complete);
+    //   }
+    // },
+    loadUser: function(){
+      return user;
     },
-    getEntry: Api.getEntry,
-    updateEntry: Api.update,
-    addEntry: Api.save,
+    getEntry: EntryService.getEntry,
+    updateEntry: EntryService.update,
+    addEntry: EntryService.save,
     updateUser: function(user){
       // localStorageService.set('user', user);
     },
   };
 
 }]);
-
-
-
-// Disable localstorage for now.
-
-// app.factory('Data', ['localStorageService', 'Api', function (localStorageService, Api) {
-
-//     var user = localStorageService.get('user') || dummyUser;
-
-//     var loadEntries = function(response){
-//       localStorageService.set('entries', data);
-//       console.log("Success:" + JSON.stringify(response));
-//     };
-
-//     var error = function(response){
-//       console.log("Error:" + JSON.stringify(response));
-//     }
-
-//     // TODO: clear out localStorage on user logout;
-//     var data = localStorageService.get('entries') || Api.get({}, loadEntries, error);
-
-//     return {
-//       getAllEntries: function(){
-//         return data;
-//       },
-//       getEntry: function(id){
-//         var i = 0;
-//         do {
-//           if (data[i].id == id){
-//             var entry = data[i];
-//           }
-//           i ++;
-//         } while (!entry && i < data.length);
-//         return entry;        
-//       },
-//       updateEntry: function(entry){
-//         var i = 0;
-//         do {
-//           if (data[i].id == entry.id){
-//             data[i] = entry;
-//           }
-//           i ++;
-//         } while (!entry && i < data.length);
-//         localStorageService.set('entries', data);
-//       },
-//       addEntry: function(){
-//         Api.save({}, 
-//           function success(rsp){
-//             console.log('Success:' + JSON.stringify(rsp));            
-//           },
-//           error
-//         );
-//       },
-//       getUser: function(){
-//         return user;
-//       },
-//       updateUser: function(user){
-//         localStorageService.set('user', user);
-//       },
-//     };
-
-// }]);
-
-// Test Data
-
-var dummyUser = { 
-  username: 'Dummy',
-  goal: 100,
-}

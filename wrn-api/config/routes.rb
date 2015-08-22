@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     # Directs /api/entries/* to Api::EntriesController
     # (app/controllers/api/entries_controller.rb)
     resources :entries, only: [:index, :create, :show, :update]
-    resources :users, only: [:create, :show, :update]
+    resources :users, only: [:create, :update]
     resource :session, only: [:create, :destroy]
   end
 

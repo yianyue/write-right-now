@@ -9,21 +9,27 @@
  * Controller of the wrnApp
  */
 
-app.controller('SessionCtrl', ['SessionService', 'localStorageService', '$location', function (SessionService, localStorageService, $location) {
+app.controller('SessionCtrl', ['SessionService', 'localStorageService', '$window', function (SessionService, localStorageService, $window) {
   
   var ctrl = this;
 
   ctrl.login = function(){
-    console.log(ctrl.email, ctrl.password);
-    SessionService.login({email: ctrl.email}, {password: ctrl.password},
+    localStorageService.clearAll();
+    SessionService.login(ctrl.info,
       function success(rsp){
         localStorageService.set('user', rsp);
-        $location.path('/entries');
+        console.log($window.location.href);
+        $window.location.href ='/#/entries';
       },
       function error(rsp){
         console.log('Error' + JSON.stringify(rsp));
       }
-      );
-  }
+    );
+  };
+
+  ctrl.logout = function(){
+    localStorageService.clearAll();
+    $window.location.href ='/';
+  };
 
 }]);
