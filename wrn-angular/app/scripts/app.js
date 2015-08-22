@@ -47,9 +47,6 @@ app.config(['$httpProvider', function($httpProvider) {
 
 app.config(function ($routeProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: 'views/about.html',
-    })
     .when('/login', {
       templateUrl: 'views/login.html',
       controller: 'UserCtrl',
@@ -72,14 +69,19 @@ app.config(function ($routeProvider) {
       navigationClass: 'fs-navbar'
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/entries'
     });
 });
 
 // ViewCtrl for the navigation bar
-app.controller("ViewCtrl", function($scope) {
+app.controller("ViewCtrl", ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
   $scope.$on("$routeChangeSuccess", function(event, current, previous) {
     $scope.navigationClass = current.$$route.navigationClass;
   });
-});
+  $scope.$on('$routeChangeStart', function(event, current, previous){
+    if (!$rootScope.currentUser && current.$$route.originalPath !== '/register'){
+      $location.path('/login');
+    }
+  });
+}]);
 

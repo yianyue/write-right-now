@@ -23,14 +23,12 @@
     <nav class="navbar navbar-default navbar-fixed-top" ng-controller="ViewCtrl" ng-class="navigationClass">
       <a class="navbar-brand" href="/#/">Write Right Now</a>
       <div class="container-fluid">
-        <div ng-controller="UserCtrl as user">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" ng-cloak>
             <li ng-hide="$root.currentUser"><a href="/#/login">Login</a></li>
             <li ng-hide="$root.currentUser"><a href="/#/register">Register</a></li>
-            <li ng-hide="!$root.currentUser"><a href="">{{$root.currentUser.name}}</a></li>
-            <li ng-hide="!$root.currentUser"><a href="" ng-click="user.logout()">Logout</a></li>
+            <li ng-hide="!$root.currentUser"><a href=""><span ng-bind="$root.currentUser.name"></span></a></li>
+            <li ng-hide="!$root.currentUser" ng-controller="UserCtrl as user"><a href="" ng-click="user.logout()">Logout</a></li>
         </ul>
-        </div>      
       </div><!-- container-fluid -->
     </nav>
 

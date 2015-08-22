@@ -13,9 +13,6 @@ app.controller('UserCtrl', ['UserService', 'SessionService', 'Data', '$window', 
   var ctrl = this;
   
   $rootScope.currentUser = Data.loadUser();
-
-  // ctrl.currentUser doesn't update on login
-  // ctrl.currentUser = Data.loadUser();
   
   ctrl.logout = function(){
     Data.clear();
