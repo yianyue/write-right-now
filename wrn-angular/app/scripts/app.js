@@ -22,13 +22,27 @@ var app = angular
     'LocalStorageModule',
     'ngQuill',
     'FBAngular',
-    // 'angularCharts'
+    'chart.js'
   ]);
 
 app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('ls');
 }]);
 
+// Optional angular chart config
+app.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+      colours: ['#FF5252', '#FF8A80'],
+      responsive: false
+    });
+    // Configure all line charts
+    ChartJsProvider.setOptions('Line', {
+      datasetFill: false
+    });
+  }])
+
+// Interceptor to send user token and email with every request
 app.config(['$httpProvider', function($httpProvider) {
   $httpProvider
     .interceptors.push(function($q, localStorageService){
@@ -78,16 +92,3 @@ app.config(function ($routeProvider) {
       redirectTo: '/entries'
     });
 });
-
-// ViewCtrl for the navigation bar
-app.controller("ViewCtrl", ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
-  $scope.$on("$routeChangeSuccess", function(event, current, previous) {
-    if (current.$$route){
-      $scope.navigationClass = current.$$route.navigationClass;
-    };
-    if (!$rootScope.currentUser && current.$$route.originalPath !== '/register'){
-      $location.path('/login');
-    };
-  });
-}]);
-

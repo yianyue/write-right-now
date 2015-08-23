@@ -21,7 +21,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="ViewCtrl" ng-class="navigationClass">
+    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="ViewCtrl" ng-class="navigationClass" ng-cloak>
       <a class="navbar-brand" href="/#/">Write Right Now</a>
       <div class="container-fluid">
         <ul class="nav navbar-nav navbar-right" ng-cloak>
@@ -60,6 +60,7 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/view.js"></script>
         <script src="scripts/controllers/user.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/entry.js"></script>

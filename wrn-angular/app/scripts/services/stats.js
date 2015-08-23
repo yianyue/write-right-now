@@ -2,8 +2,6 @@
 
 app.factory('Stats', ['localStorageService', function (localStorageService) {
 
-  var entries = localStorageService.get('entries');
-
   function getDates(startDate, endDate){
     var dateArr = [];
     var currentDate = new Date(startDate);
@@ -17,7 +15,6 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
     }
     return dateArr;
   };
-
   
   return {
     matchEntriesToDates: function(entries){
@@ -30,7 +27,6 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
           }
         });
       });
-      console.log(days);
       return days;
     },
   };
