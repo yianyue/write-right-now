@@ -21,14 +21,17 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="ViewCtrl" ng-class="navigationClass" ng-cloak>
+    <nav class="navbar navbar-default navbar-fixed-top" 
+        ng-controller="ViewCtrl" 
+        ng-class="navigationClass" 
+        >
       <a class="navbar-brand" href="/#/">Write Right Now</a>
       <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-right" ng-cloak>
-            <li ng-hide="$root.currentUser"><a href="/#/login">Login</a></li>
-            <li ng-hide="$root.currentUser"><a href="/#/register">Register</a></li>
-            <li ng-hide="!$root.currentUser"><a href=""><span ng-bind="$root.currentUser.name"></span></a></li>
-            <li ng-hide="!$root.currentUser" ng-controller="UserCtrl as user"><a href="" ng-click="user.logout()">Logout</a></li>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-show="!$root.currentUser"><a href="/#/login">Login</a></li>
+            <li ng-show="!$root.currentUser"><a href="/#/register">Register</a></li>
+            <li ng-show="$root.currentUser"  ng-cloak><a href="/#/stats"><span ng-bind="$root.currentUser.name"></span></a></li>
+            <li ng-show="$root.currentUser" ng-controller="UserCtrl as user"><a href="" ng-click="user.logout()">Logout</a></li>
         </ul>
       </div><!-- container-fluid -->
     </nav>
@@ -53,8 +56,8 @@
     <script src="bower_components/quill/dist/quill.js"></script>
     <script src="bower_components/ngquill/src/ng-quill.min.js"></script>
     <script src="bower_components/angular-fullscreen/src/angular-fullscreen.js"></script>
-    <script src="bower_components/Chart.js/Chart.min.js"></script>
-    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -62,6 +65,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/view.js"></script>
         <script src="scripts/controllers/user.js"></script>
+        <script src="scripts/controllers/stats.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/entry.js"></script>
         <script src="scripts/services/services.js"></script>

@@ -1,3 +1,5 @@
+'use strict';
+
 // Service to compile user statistics
 
 app.factory('Stats', ['localStorageService', function (localStorageService) {
@@ -18,6 +20,7 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
   
   return {
     matchEntriesToDates: function(entries){
+      // debugger;
       var days = getDates(entries[entries.length-1].created_at, entries[0].created_at);
       days.forEach(function(day, i, days){
         entries.forEach(function(entry, i, entries){
@@ -29,6 +32,24 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       });
       return days;
     },
+    calcStreak: function(entries){
+      var streaks = [0];
+      var j = 0
+      var days = this.matchEntriesToDates(entries);
+      days.forEach(function(day, i, days){
+        if (day.entry && day.entry.word_count >= day.entry.goal){
+          streaks[j]++;
+        }else {
+          j++;
+          streaks[j] = 0;
+        }
+        // console.log(streaks);
+      });
+      return Math.max.apply(null,streaks);
+    },
+    calcAverage: function(entries){
+
+    }
   };
 
 }]);

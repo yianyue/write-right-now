@@ -1,3 +1,5 @@
+'use strict';
+
 app.factory('EntryService', ['$resource', function($resource){
   return $resource("http://localhost:3000/api/entries/:id", {}, {
     get: {method: 'GET', cache: false, isArray: true},
@@ -20,16 +22,16 @@ return $resource('http://localhost:3000/api/session', {}, {
   });
 }]);
 
-app.factory('Data', ['EntryService', 'UserService', 'localStorageService', function (EntryService, UserService, localStorageService) {
+app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stats', function (EntryService, UserService, localStorageService, Stats) {
 
-  var entries = localStorageService.get('entries');
+  var days = localStorageService.get('days');;
 
   function getEntries(complete) {
     EntryService.get({},
       function success(rsp){
-        entries = rsp;
-        localStorageService.set('entries', rsp)
-        complete(entries);
+        days = Stats.matchEntriesToDates(rsp);
+        localStorageService.set('days', days);
+        complete(days);
       },
       function error(rsp){
         console.log('Error' + JSON.stringify(rsp));
@@ -38,20 +40,22 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', funct
   };
 
   function lsUpdateEntry(entry){
-    var i = 0;
-      do {
-        if (entries[i].id == entry.id){
-          entries[i] = entry;
-        }
-        i ++;
-      } while (!entry && i < entries.length);
-      localStorageService.set('entries', entries);
+    // assume only the last entry gets updated
+    days[days.length-1].entry = entry;
+    // var i = 0;
+      // do {
+      //   if (days[i].entry.id == entry.id){
+      //     days[i].entry = entry;
+      //   }
+      //   i ++;
+      // } while (i < days.length);
+    localStorageService.set('days', days);
   }
   
   return {
     loadEntries: function(complete){
-      if(entries) {
-        complete(entries);
+      if(days) {
+        complete(days);
       } else {
         getEntries(complete);
       }
@@ -61,6 +65,7 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', funct
     },
     clear: function(){
       localStorageService.clearAll();
+      days = null;
     },
     setUser: function(user){
       localStorageService.set('user', user);
@@ -69,7 +74,6 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', funct
     saveEntry: function(entry){
       EntryService.update({id: entry.id}, {entry: entry},
         function success(rsp){
-          console.log('Success' + JSON.stringify(rsp));
           lsUpdateEntry(rsp);
         },
         function error(rsp){
