@@ -26,7 +26,7 @@
 
 <div class="list-group" ng-repeat="day in main.days | orderBy:'date':true">
 
-  <div ng-show="day.entry">
+  <div ng-show="day.entry && day.entry.word_count">
     <a class="list-group-item" ng-href="#/entries/{{ day.entry.id }}">
     <h4 class="list-group-item-heading">{{ day.entry.created_at | date:"MMM d, y" }}</h4>
     <div class="progress">
@@ -42,7 +42,7 @@
     </a>
   </div><!-- ng-show -->
 
-  <div ng-hide="day.entry" class="list-group-item">
+  <div ng-hide="day.entry && day.entry.word_count" class="list-group-item">
     <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }}</h4>
     <div class="progress">
       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
