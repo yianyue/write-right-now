@@ -5,6 +5,8 @@ class Entry < ActiveRecord::Base
   before_create :set_default
   after_update :update_word_count, if: :content_changed?
 
+  # private
+
   def update_word_count
     # update_columns skips callback and validation
     # otherwise it goes into a callback loop

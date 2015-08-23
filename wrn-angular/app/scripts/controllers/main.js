@@ -12,45 +12,40 @@
 app.controller('MainCtrl', ['Data', function (Data) {
   
   var ctrl = this;
-
-  var errorRsp = function(rsp){ console.log('Error' + JSON.stringify(rsp)); };
-
+  
+  // max number of characters (include html tags) of content to show on the main page
+  ctrl.previewLimit = 100;
+  
   var getDates = function(startDate, endDate){
-    var dateArray = [];
+    var dateArr = [];
     var currentDate = new Date(startDate);
     endDate = new Date(endDate);
     while (currentDate <= endDate) {
-      dateArray.push( new Date (currentDate) );
+      dateArr.push({
+        date: new Date (currentDate),
+        entry: null
+      });
       currentDate.setDate(currentDate.getDate()+1);
     }
-    return dateArray;
+    return dateArr;
   };
 
+  var matchEntriesToDates = function(entries, days){
+    days.forEach(function(day, i, days){
+      entries.forEach(function(entry, i, entries){
+        var entryDate = new Date(entry.created_at);
+        if(entryDate.setHours(0,0,0,0) == day.date.setHours(0,0,0,0)){
+          day.entry = entry;
+        }
+      });
+    });
+    console.log(days);
+  };
 
   Data.loadEntries(function(entries){
     ctrl.entries = entries;
-    console.log(entries);
-    ctrl.dates = getDates(entries[entries.length-1].created_at, entries[0].created_at);
-    console.log(ctrl.dates);
+    ctrl.days = getDates(entries[entries.length-1].created_at, entries[0].created_at);
+    matchEntriesToDates(ctrl.entries, ctrl.days);
   });
-
-  Data.loadUser(function(user){
-    ctrl.user = user;
-  });
-
-  // max number of characters of content to show on the main page
-  ctrl.previewLimit = 100;
-
-  // add and remove entry will not be available to the user.
-  ctrl.addEntry = function () {
-    // TODO: create entry and immediately display it; update when the response comes back
-    var newEntry = Data.addEntry({},
-      function success(rsp){
-        console.log('Success' + JSON.stringify(rsp));
-        ctrl.entries.push(rsp);
-      },
-      errorRsp
-    );
-  };
 
 }]);

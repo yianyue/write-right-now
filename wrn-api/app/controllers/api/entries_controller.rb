@@ -1,19 +1,23 @@
 class Api::EntriesController < ApplicationController
 
-  # before_action :authenticate_user!
+  before_action :authenticate_user
   
   def index
-    # @entries = current_user.entries.order(created_at: :desc)
+    @entries = current_user.entries.order(created_at: :desc)
     # TODO: time zone
-    # Entry.create(user: current_user) if @entries.empty?
-    # @entries << Entry.create(user: current_user) if @entries[0].created_at.to_date < Date.today
-    @entries = Entry.all
+    Entry.create(user: current_user) if @entries.empty?
+    @entries << Entry.create(user: current_user) if @entries[0].created_at.to_date < Date.today
     render json: @entries
   end
 
   def show
-    @entry = Entry.find(params[:id])
-    render json: @entry
+    @entry = current_user.entries    
+    @entry = @entry.find(params[:id])
+    if @entry
+      render json: @entry
+    else
+      render nothing: true, status: 401
+    end
   end
 
   def create

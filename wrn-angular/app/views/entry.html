@@ -1,9 +1,8 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <a class="navbar-brand" href="/#/">Write Right Now</a>
+<nav class="navbar navbar-fixed-bottom">
   <div class="container-fluid">
-    <p class="navbar-text">{{ entry.currentEntry.day }} | {{ entry.currentEntry.wordcount }}/ {{ entry.currentEntry.goal }} words</p>
+    <p class="navbar-text"><span ng-bind="entry.progress"></span>%</p> 
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="" ng-click="entry.toggleFullscreen()">Toggle Fullscreen</a></li>
+      <li><a href="" ng-click="entry.toggleFullscreen()">Full</a></li>
     </ul>
   </div><!-- container-fluid -->
 </nav>
@@ -18,3 +17,4 @@
   >
   </ng-quill-editor>
 </div>
+
