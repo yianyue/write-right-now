@@ -4,6 +4,8 @@
 
 app.factory('Stats', ['localStorageService', function (localStorageService) {
 
+  // var days = localStorageService.get('days')
+
   function getDates(startDate, endDate){
     var dateArr = [];
     var currentDate = new Date(startDate);
@@ -17,6 +19,43 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
     }
     return dateArr;
   };
+
+  function calcCompleted(days){
+    var streaks = [0];
+    var completed = 0;
+    var skipped = 0;
+    var j = 0
+    days.forEach(function(day, i, days){
+      if (day.entry && day.entry.word_count >= day.entry.goal){
+        streaks[j]++;
+        completed ++;
+      }else {
+        j++;
+        streaks[j] = 0;
+        if(day.entry==null){
+          skipped ++;
+        };
+      }
+    });
+    return {
+      streak: Math.max.apply(null,streaks),
+      daysCompleted: completed,
+      daysSkipped: skipped,
+      daysPartial: days.length - completed - skipped
+    };
+  };
+
+  function calcSumAvg(days){
+    var sum = 0;
+    days.forEach(function(day, i, days){
+      sum += day.entry ? day.entry.word_count : 0;
+    });
+    var avg = sum/days.length;
+    return {
+      dailyAvg: avg, 
+      totalWords:sum
+    };
+  }
   
   return {
     matchEntriesToDates: function(entries){
@@ -32,27 +71,14 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       });
       return days;
     },
-    calcStreak: function(days){
-      var streaks = [0];
-      var j = 0
-      days.forEach(function(day, i, days){
-        if (day.entry && day.entry.word_count >= day.entry.goal){
-          streaks[j]++;
-        }else {
-          j++;
-          streaks[j] = 0;
-        }
-      });
-      return Math.max.apply(null,streaks);
-    },
-    calcAverage: function(days){
-      var sum = 0;
-      days.forEach(function(day, i, days){
-        sum += day.entry ? day.entry.word_count : 0;
-      });
-      var avg = sum/days.length;
-      return avg;
-    }
+    getStats: function(days){
+      var obj = {};
+      obj.totalDays = days.length;
+      jQuery.extend(obj, calcSumAvg(days), calcCompleted(days));
+      console.log(obj);
+      return obj;
+    }    
+    
   };
 
 }]);

@@ -1,3 +1,12 @@
-longest streak: {{stats.longestStreak}}
+Been writing for: {{stats.overview.totalDays}} days
 <br />
-daily avearge: {{stats.dailyAvg}} words
+Completed writing goal on: {{stats.overview.daysCompleted}} days
+<br />
+longest streak: {{stats.overview.streak}} days
+<br />
+daily avearge: {{stats.overview.dailyAvg}} words
+<br />
+total words written: {{stats.overview.totalWords}} words
+
+<canvas id="doughnut" class="chart chart-doughnut" data="stats.data"
+  labels="stats.labels"></canvas> 
