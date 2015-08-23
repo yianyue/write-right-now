@@ -22,6 +22,7 @@ var app = angular
     'LocalStorageModule',
     'ngQuill',
     'FBAngular',
+    // 'angularCharts'
   ]);
 
 app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
@@ -67,6 +68,11 @@ app.config(function ($routeProvider) {
       controller: 'EntryCtrl',
       controllerAs: 'entry',
       navigationClass: 'fs-navbar'
+    })
+    .when('/stats', {
+      templateUrl: 'views/stats.html',
+      controller: 'StatsCtrl',
+      controllerAs: 'stats'
     })
     .otherwise({
       redirectTo: '/entries'
