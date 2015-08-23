@@ -32,10 +32,9 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       });
       return days;
     },
-    calcStreak: function(entries){
+    calcStreak: function(days){
       var streaks = [0];
       var j = 0
-      var days = this.matchEntriesToDates(entries);
       days.forEach(function(day, i, days){
         if (day.entry && day.entry.word_count >= day.entry.goal){
           streaks[j]++;
@@ -43,12 +42,16 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
           j++;
           streaks[j] = 0;
         }
-        // console.log(streaks);
       });
       return Math.max.apply(null,streaks);
     },
-    calcAverage: function(entries){
-
+    calcAverage: function(days){
+      var sum = 0;
+      days.forEach(function(day, i, days){
+        sum += day.entry ? day.entry.word_count : 0;
+      });
+      var avg = sum/days.length;
+      return avg;
     }
   };
 

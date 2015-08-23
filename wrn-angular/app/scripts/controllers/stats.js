@@ -12,11 +12,12 @@
 app.controller('StatsCtrl', ['Data','Stats', function (Data, Stats) {
   
   var ctrl = this;
-  
-  // Data.loadEntries(function(entries){
-  //   ctrl.entries = entries;
-    ctrl.longestStreak = Stats.calcStreak();
-  // });
+
+  Data.loadEntries(function(days){
+    ctrl.days = days;
+    ctrl.longestStreak = Stats.calcStreak(days);
+    ctrl.dailyAvg = Stats.calcAverage(days);
+  });
 
 
 }]);
