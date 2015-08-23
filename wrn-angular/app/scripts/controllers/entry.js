@@ -47,7 +47,7 @@ app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Full
       Data.getEntry({id: $routeParams.id},
         function success(rsp){
           ctrl.currentEntry = rsp;
-          ctrl.progress = ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100;
+          ctrl.progress = Math.round(ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100);
           var entryDate = new Date(ctrl.currentEntry.created_at);
           if (entryDate.setHours(0,0,0,0) == today.setHours(0,0,0,0)){
             ctrl.editor.enable();

@@ -26,6 +26,7 @@ app.controller('UserCtrl', ['UserService', 'SessionService', 'Data', '$location'
   
   ctrl.logout = function(){
     Data.clear();
+    $rootScope.currentUser = null;
     $location.path('/login');
   };
 

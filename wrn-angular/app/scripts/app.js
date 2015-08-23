@@ -76,12 +76,12 @@ app.config(function ($routeProvider) {
 // ViewCtrl for the navigation bar
 app.controller("ViewCtrl", ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
   $scope.$on("$routeChangeSuccess", function(event, current, previous) {
-    $scope.navigationClass = current.$$route.navigationClass;
-  });
-  $scope.$on('$routeChangeStart', function(event, current, previous){
+    if (current.$$route){
+      $scope.navigationClass = current.$$route.navigationClass;
+    };
     if (!$rootScope.currentUser && current.$$route.originalPath !== '/register'){
       $location.path('/login');
-    }
+    };
   });
 }]);
 
