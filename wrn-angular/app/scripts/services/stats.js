@@ -32,7 +32,7 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       }else {
         j++;
         streaks[j] = 0;
-        if(day.entry==null){
+        if(day.entry==null || day.entry.word_count == 0){
           skipped ++;
         };
       }
@@ -46,14 +46,13 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
   function calcWordStats(days){
     var sum = 0;
     var obj = {
-      data: [],
+      data: [[]],
       labels: []
     };
     days.forEach(function(day, i, days){
-      debugger;
-      obj.labels[i] = day.date;
+      obj.labels[i] = day.date.split('T')[0];
       var words = day.entry ? day.entry.word_count : 0;
-      obj.data[i] = words;
+      obj.data[0][i] = words;
       sum += words;
     });
     var avg = Math.round(sum/days.length);

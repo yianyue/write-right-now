@@ -33,12 +33,15 @@ app.config(['localStorageServiceProvider', function(localStorageServiceProvider)
 app.config(['ChartJsProvider', function (ChartJsProvider) {
     // Configure all charts
     ChartJsProvider.setOptions({
-      colours: ['#FF5252', '#FF8A80'],
+      // colours: ['Green', 'Gray'],
       responsive: false
     });
     // Configure all line charts
     ChartJsProvider.setOptions('Line', {
-      datasetFill: false
+      // datasetFill: false
+    });
+    ChartJsProvider.setOptions('Doughnut',{
+      percentageInnerCutout : 75
     });
   }])
 
