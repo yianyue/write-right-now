@@ -4,14 +4,16 @@ class Api::EntriesController < ApplicationController
 
   def index
     @entries = current_user.entries.order(:created_at)
-    # TODO: time zone
+    @entries.where(word_count: 0).delete_all
     Entry.create(user: current_user) if @entries.empty?
+    # TODO: time zone
     @entries << Entry.create(user: current_user) if @entries.last.created_at.to_date < Date.today
 
     # exclude today
     total_days = Date.today - @entries.first.created_at.to_date
     days_completed = @entries.where("word_count >= goal").length
     num_lock = [@entries.size - 1, total_days-days_completed].min
+    # PROBLEM: lock empty entry
     if num_lock > 0
       (0...num_lock).each{ |i|
         @entries[i].locked = true
