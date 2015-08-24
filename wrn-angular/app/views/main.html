@@ -36,8 +36,7 @@
     </div>
     <!-- not using handlebars here to display html -->
     <p class="text-muted">
-      <span ng-bind-html="day.entry.content | limitTo: main.previewLimit"></span>
-      {{day.entry.content.length >= main.previewLimit ? '...' : ''}}
+      {{day.entry.preview}}
     </p>
     </a>
   </div><!-- ng-show -->

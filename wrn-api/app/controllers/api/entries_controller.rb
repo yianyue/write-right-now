@@ -7,7 +7,7 @@ class Api::EntriesController < ApplicationController
     # TODO: time zone
     Entry.create(user: current_user) if @entries.empty?
     @entries << Entry.create(user: current_user) if @entries.last.created_at.to_date < Date.today
-    render json: @entries
+    render json: @entries.as_json(only: [:id, :created_at, :preview, :word_count, :goal]), status: 200
   end
 
   def show
@@ -28,8 +28,12 @@ class Api::EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
-    @entry.update(entry_params)
-    render json: @entry
+    if @entry.created_at.to_date == Date.today
+      @entry.update(entry_params)
+      render json: @entry
+    else
+      render nothing: true, status: 401
+    end
   end
 
   protected

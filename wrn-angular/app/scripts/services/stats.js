@@ -14,7 +14,7 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
     endDate.setHours(0,0,0,0);
     while (currentDate <= endDate) {
       dateArr.push({
-        date: currentDate.toDateString(),
+        date: new Date (currentDate),
         entry: null
       });
       currentDate.setDate(currentDate.getDate()+1);
@@ -26,18 +26,18 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
     var streaks = [0];
     var completed = 0;
     var skipped = 0;
-    var j = 0
+    var j = 0;
     days.forEach(function(day, i, days){
       if (day.entry && day.entry.word_count >= day.entry.goal){
         streaks[j]++;
         completed ++;
-      }else {
+      } else {
         j++;
         streaks[j] = 0;
-        if(day.entry==null || day.entry.word_count == 0){
+        if (day.entry==null || day.entry.word_count == 0){
           skipped ++;
         };
-      }
+      };
     });
     return { 
       streak: Math.max.apply(null,streaks), 
@@ -52,7 +52,8 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       labels: []
     };
     days.forEach(function(day, i, days){
-      obj.labels[i] = day.date;
+      var date = new Date(day.date);
+      obj.labels[i] = date.toDateString();
       var words = day.entry ? day.entry.word_count : 0;
       obj.data[0][i] = words;
       sum += words;
@@ -62,12 +63,6 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
     obj.totalWords = sum;
     return obj;
   };
-
-  function extractWords(days){
-    
-    days.forEach(function(day, i, days){
-    });
-  }
   
   return {
     matchEntriesToDates: function(entries){
@@ -76,11 +71,12 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
         entries.forEach(function(entry, i, entries){
           var entryDate = new Date(entry.created_at);
           var date = new Date(day.date);
-          if(entryDate.setHours(0,0,0,0) == date.setHours(0,0,0,0)){
+          if(entryDate.setHours(0,0,0,0) == day.date.setHours(0,0,0,0)){
             day.entry = entry;
           }
         });
       });
+      console.log(days);
       return days;
     },
     getStats: function(days){
@@ -92,7 +88,7 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       };
       var completion = {
         totalDays: days.length,
-        labels: ['Days of Victory','Days You Tried', 'Days Skipped'],
+        labels: ['Days of Victory','Days You Tried', 'Days Skipped']
       };
       jQuery.extend(completion,calcCompleted(days) );
       var words = {
