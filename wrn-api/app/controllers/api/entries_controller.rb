@@ -6,7 +6,7 @@ class Api::EntriesController < ApplicationController
     @entries = current_user.entries
     # TODO: time zone
     Entry.create(user: current_user) if @entries.empty?
-    @entries << Entry.create(user: current_user) if @entries[0].created_at.to_date < Date.today
+    @entries << Entry.create(user: current_user) if @entries.last.created_at.to_date < Date.today
     render json: @entries.order(created_at: :desc)
   end
 
