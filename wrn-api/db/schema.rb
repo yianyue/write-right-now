@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824164708) do
+ActiveRecord::Schema.define(version: 20150824191614) do
 
   create_table "entries", force: :cascade do |t|
     t.text     "content"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150824164708) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.string   "preview"
+    t.boolean  "locked"
   end
 
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"

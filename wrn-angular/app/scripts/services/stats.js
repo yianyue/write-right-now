@@ -2,9 +2,7 @@
 
 // Service to compile user statistics
 
-app.factory('Stats', ['localStorageService', function (localStorageService) {
-
-  // var days = localStorageService.get('days')
+app.factory('Stats', function () {
 
   function getDates(startDate, endDate){
     var dateArr = [];
@@ -76,7 +74,6 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
           }
         });
       });
-      console.log(days);
       return days;
     },
     getStats: function(days){
@@ -91,11 +88,7 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
         labels: ['Days of Victory','Days You Tried', 'Days Skipped']
       };
       jQuery.extend(completion,calcCompleted(days) );
-      var words = {
-        labels: [],
-        data:[]
-      };
-      jQuery.extend(words,calcWordStats(days))
+      var words = calcWordStats(days);
       return {
         today: today,
         completion: completion,
@@ -104,4 +97,4 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
     }        
   };
 
-}]);
+});

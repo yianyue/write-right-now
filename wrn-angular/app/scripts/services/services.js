@@ -29,7 +29,6 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
   function getEntries(complete) {
     EntryService.get({},
       function success(rsp){
-        console.log(rsp);
         days = Stats.matchEntriesToDates(rsp);
         localStorageService.set('days', days);
         complete(days);
