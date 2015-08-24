@@ -18,7 +18,6 @@ app.controller('MainCtrl', ['Data','Stats', function (Data, Stats) {
 
   Data.loadEntries(function(days){
     ctrl.days = days;
-    console.log(days);
   });
 
 }]);

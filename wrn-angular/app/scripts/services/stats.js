@@ -9,10 +9,12 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
   function getDates(startDate, endDate){
     var dateArr = [];
     var currentDate = new Date(startDate);
+    currentDate.setHours(0,0,0,0);
     endDate = new Date(endDate);
+    endDate.setHours(0,0,0,0);
     while (currentDate <= endDate) {
       dateArr.push({
-        date: new Date (currentDate),
+        date: currentDate.toDateString(),
         entry: null
       });
       currentDate.setDate(currentDate.getDate()+1);
@@ -50,7 +52,7 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       labels: []
     };
     days.forEach(function(day, i, days){
-      obj.labels[i] = day.date.split('T')[0];
+      obj.labels[i] = day.date;
       var words = day.entry ? day.entry.word_count : 0;
       obj.data[0][i] = words;
       sum += words;
@@ -69,11 +71,12 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
   
   return {
     matchEntriesToDates: function(entries){
-      var days = getDates(entries[entries.length-1].created_at, entries[0].created_at);
+      var days = getDates(entries[0].created_at, entries[entries.length-1].created_at);
       days.forEach(function(day, i, days){
         entries.forEach(function(entry, i, entries){
           var entryDate = new Date(entry.created_at);
-          if(entryDate.setHours(0,0,0,0) == day.date.setHours(0,0,0,0)){
+          var date = new Date(day.date);
+          if(entryDate.setHours(0,0,0,0) == date.setHours(0,0,0,0)){
             day.entry = entry;
           }
         });
@@ -97,7 +100,6 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
         data:[]
       };
       jQuery.extend(words,calcWordStats(days))
-      console.log(days);
       return {
         today: today,
         completion: completion,
