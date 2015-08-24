@@ -28,7 +28,7 @@
 
   <div ng-show="(day.entry && day.entry.word_count) || $index == 0">
     <a class="list-group-item" ng-href="#/entries/{{ day.entry.id }}">
-    <h4 class="list-group-item-heading">{{ day.entry.created_at | date:"MMM d, y" }}</h4>
+    <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }}</h4>
     <div class="progress">
       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ day.entry.word_count >= day.entry.goal ? 100 : day.entry.word_count/day.entry.goal*100 }}%">
       <span>{{ day.entry.word_count }}/{{ day.entry.goal }}</span> words

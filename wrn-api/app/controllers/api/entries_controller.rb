@@ -3,12 +3,12 @@ class Api::EntriesController < ApplicationController
   before_action :authenticate_user
   
   def index
-    @entries = current_user.entries
+    @entries = current_user.entries.order(:created_at)
     # TODO: time zone
     Entry.create(user: current_user) if @entries.empty?
-    # Assume the last entry is the latest
     @entries << Entry.create(user: current_user) if @entries.last.created_at.to_date < Date.today
-    render json: @entries.order(created_at: :desc)
+    # @entries = @entries.order(:created_at)
+    render json: @entries
   end
 
   def show
