@@ -37,29 +37,39 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
         };
       }
     });
-    return {
-      streak: Math.max.apply(null,streaks),
-      daysCompleted: completed,
-      daysSkipped: skipped,
-      daysPartial: days.length - completed - skipped
+    return { 
+      streak: Math.max.apply(null,streaks), 
+      data: [completed, days.length - completed - skipped, skipped]
     };
   };
 
-  function calcSumAvg(days){
+  function calcWordStats(days){
     var sum = 0;
-    days.forEach(function(day, i, days){
-      sum += day.entry ? day.entry.word_count : 0;
-    });
-    var avg = sum/days.length;
-    return {
-      dailyAvg: avg, 
-      totalWords:sum
+    var obj = {
+      data: [],
+      labels: []
     };
+    days.forEach(function(day, i, days){
+      debugger;
+      obj.labels[i] = day.date;
+      var words = day.entry ? day.entry.word_count : 0;
+      obj.data[i] = words;
+      sum += words;
+    });
+    var avg = Math.round(sum/days.length);
+    obj.dailyAvg = avg;
+    obj.totalWords = sum;
+    return obj;
+  };
+
+  function extractWords(days){
+    
+    days.forEach(function(day, i, days){
+    });
   }
   
   return {
     matchEntriesToDates: function(entries){
-      // debugger;
       var days = getDates(entries[entries.length-1].created_at, entries[0].created_at);
       days.forEach(function(day, i, days){
         entries.forEach(function(entry, i, entries){
@@ -72,13 +82,29 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       return days;
     },
     getStats: function(days){
-      var obj = {};
-      obj.totalDays = days.length;
-      jQuery.extend(obj, calcSumAvg(days), calcCompleted(days));
-      console.log(obj);
-      return obj;
-    }    
-    
+      var todayEntry = days[days.length-1].entry;
+      var today = { 
+        progress: Math.round(todayEntry.word_count/todayEntry.goal* 100),
+        data: [todayEntry.word_count, Math.max(todayEntry.goal-todayEntry.word_count, 0)],
+        labels: ['Words Written Today', 'Words to Goal']
+      };
+      var completion = {
+        totalDays: days.length,
+        labels: ['Days of Victory','Days You Tried', 'Days Skipped'],
+      };
+      jQuery.extend(completion,calcCompleted(days) );
+      var words = {
+        labels: [],
+        data:[]
+      };
+      jQuery.extend(words,calcWordStats(days))
+      console.log(days);
+      return {
+        today: today,
+        completion: completion,
+        words: words
+      };
+    }        
   };
 
 }]);

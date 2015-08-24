@@ -1,12 +1,21 @@
-Been writing for: {{stats.overview.totalDays}} days
-<br />
-Completed writing goal on: {{stats.overview.daysCompleted}} days
-<br />
-longest streak: {{stats.overview.streak}} days
-<br />
-daily avearge: {{stats.overview.dailyAvg}} words
-<br />
-total words written: {{stats.overview.totalWords}} words
+<h2>Today</h2>
+Progress: {{stats.dt.today.progress}}% 
+<canvas id="doughnut" class="chart chart-doughnut" data="stats.dt.today.data"
+  labels="stats.dt.today.labels"></canvas> 
 
-<canvas id="doughnut" class="chart chart-doughnut" data="stats.data"
-  labels="stats.labels"></canvas> 
+
+<h2>Overview</h2>
+
+Longest Streak: {{stats.dt.completion.streak}} days
+<br />
+<canvas id="pie" class="chart chart-pie" data="stats.dt.completion.data"
+  labels="stats.dt.completion.labels"></canvas> 
+
+<h2>Word Count</h2>
+total words written: {{stats.dt.words.totalWords}} words
+<br />
+daily avearge: {{stats.dt.words.dailyAvg}} words
+<canvas id="line" class="chart chart-line" data="stats.dt.words.data"
+  labels="stats.dt.words.labels" legend="true" series="series"
+  click="onClick">
+</canvas> 
