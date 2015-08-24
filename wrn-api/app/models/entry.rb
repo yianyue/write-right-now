@@ -31,23 +31,21 @@ class Entry < ActiveRecord::Base
   end
 
   def self.set_lock(entries)
-     # exclude today
-    entries_mod = []
+    entries = entries.order(:created_at)
     entries.update_all(locked: false)
+
     total_days = Date.today - entries.first.created_at.to_date
     days_completed = entries.where("word_count >= goal").length
     num_lock = [entries.size - 1, total_days-days_completed].min
-    # entries.each{|e|
 
-    # }
     if num_lock > 0
       (0...num_lock).each{ |i|
         entries[i].locked = true
         entries[i].save
-        entries_mod << entries[i]
       }
     end
-    return entries_mod
+    # return entries
+    return [entries[num_lock-1], entries[num_lock]]
   end
   
 end

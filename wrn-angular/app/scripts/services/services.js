@@ -72,7 +72,7 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     saveEntry: function(entry){
       EntryService.update({id: entry.id}, {entry: entry},
         function success(rsp){
-          console.log('Success' + JSON.stringify(rsp) );
+          console.log('Success', rsp );
           rsp.forEach(function(el, i, arr){
             lsUpdateEntry(el);
           });
