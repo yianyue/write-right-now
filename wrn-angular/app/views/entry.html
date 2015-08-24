@@ -1,12 +1,3 @@
-<nav class="navbar navbar-fixed-bottom">
-  <div class="container-fluid">
-    <p class="navbar-text"><span ng-bind="entry.progress"></span>%</p> 
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="" ng-click="entry.toggleFullscreen()">Full</a></li>
-    </ul>
-  </div><!-- container-fluid -->
-</nav>
-
 <div class="editor">
   <ng-quill-editor 
     ng-model="entry.currentEntry.content" 
@@ -18,3 +9,11 @@
   </ng-quill-editor>
 </div>
 
+<nav class="navbar navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text"><span ng-bind="entry.progress"></span>%</p> 
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="" ng-click="entry.toggleFullscreen()">Full</a></li>
+    </ul>
+  </div><!-- container-fluid -->
+</nav>

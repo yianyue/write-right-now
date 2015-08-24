@@ -6,36 +6,36 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-users = User.create([
-  {
-    name: 'Rei', 
-    email: 'mars@gmail.com', 
-    goal: 100, 
-    password: 'password', 
-    password_confirmation: 'password'
-  },
-  {
-    name: 'Usagi', 
-    email: 'moon@gmail.com', 
-    goal: 1, 
-    password: 'password', 
-    password_confirmation: 'password'
-  },
-  {
-    name: 'Makoto', 
-    email: 'jupiter@gmail.com', 
-    goal: 500, 
-    password: 'password', 
-    password_confirmation: 'password'
-  },
-  {
-    name: 'Ami', 
-    email: 'mercury@gmail.com', 
-    goal: 1000, 
-    password: 'password', 
-    password_confirmation: 'password'
-  },
-])
+# users = User.create([
+#   {
+#     name: 'Rei', 
+#     email: 'mars@gmail.com', 
+#     goal: 100, 
+#     password: 'password', 
+#     password_confirmation: 'password'
+#   },
+#   {
+#     name: 'Usagi', 
+#     email: 'moon@gmail.com', 
+#     goal: 1, 
+#     password: 'password', 
+#     password_confirmation: 'password'
+#   },
+#   {
+#     name: 'Makoto', 
+#     email: 'jupiter@gmail.com', 
+#     goal: 500, 
+#     password: 'password', 
+#     password_confirmation: 'password'
+#   },
+#   {
+#     name: 'Ami', 
+#     email: 'mercury@gmail.com', 
+#     goal: 1000, 
+#     password: 'password', 
+#     password_confirmation: 'password'
+#   },
+# ])
 
 
 entries = Entry.create([

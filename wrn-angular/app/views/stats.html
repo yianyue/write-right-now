@@ -1,0 +1,26 @@
+<h2>Today</h2>
+
+<div class='donut-outer'>
+  <div class='donut-inner'>
+    <h4>{{stats.dt.today.progress}}%</h4>
+  {{stats.dt.today.data[1]}} words to goal
+  </div>
+</div>
+
+  <canvas  id="doughnut" class="chart chart-doughnut" data="stats.dt.today.data"
+    labels="stats.dt.today.labels"></canvas> 
+
+<h2>Overview</h2>
+
+Longest Streak: {{stats.dt.completion.streak}} days
+<br />
+<canvas id="pie" class="chart chart-pie" data="stats.dt.completion.data"
+  labels="stats.dt.completion.labels"></canvas> 
+
+<h2>Word Count</h2>
+total words written: {{stats.dt.words.totalWords}} words
+<br />
+daily avearge: {{stats.dt.words.dailyAvg}} words
+<canvas id="line" class="chart chart-line" data="stats.dt.words.data"
+  labels="stats.dt.words.labels">
+</canvas> 

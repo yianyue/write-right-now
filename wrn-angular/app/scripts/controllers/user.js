@@ -8,7 +8,7 @@
  * Controller of the wrnApp
  */
 
-app.controller('UserCtrl', ['UserService', 'SessionService', 'Data', '$location', '$rootScope', function (UserService, SessionService, Data, $location, $rootScope) {
+app.controller('UserCtrl', ['UserService', 'SessionService', 'Data', 'Stats', '$location', '$rootScope', function (UserService, SessionService, Data, Stats, $location, $rootScope) {
   
   var ctrl = this;
   

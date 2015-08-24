@@ -22,12 +22,30 @@ var app = angular
     'LocalStorageModule',
     'ngQuill',
     'FBAngular',
+    'chart.js'
   ]);
 
 app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('ls');
 }]);
 
+// Optional angular chart config
+app.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+      // colours: ['Green', 'Gray'],
+      responsive: false,
+    });
+    // Configure all line charts
+    ChartJsProvider.setOptions('Line', {
+      // datasetFill: false
+    });
+    ChartJsProvider.setOptions('Doughnut',{
+      percentageInnerCutout : 75
+    });
+  }])
+
+// Interceptor to send user token and email with every request
 app.config(['$httpProvider', function($httpProvider) {
   $httpProvider
     .interceptors.push(function($q, localStorageService){
@@ -68,20 +86,12 @@ app.config(function ($routeProvider) {
       controllerAs: 'entry',
       navigationClass: 'fs-navbar'
     })
+    .when('/stats', {
+      templateUrl: 'views/stats.html',
+      controller: 'StatsCtrl',
+      controllerAs: 'stats'
+    })
     .otherwise({
       redirectTo: '/entries'
     });
 });
-
-// ViewCtrl for the navigation bar
-app.controller("ViewCtrl", ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
-  $scope.$on("$routeChangeSuccess", function(event, current, previous) {
-    if (current.$$route){
-      $scope.navigationClass = current.$$route.navigationClass;
-    };
-    if (!$rootScope.currentUser && current.$$route.originalPath !== '/register'){
-      $location.path('/login');
-    };
-  });
-}]);
-
