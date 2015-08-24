@@ -5,9 +5,9 @@ class Entry < ActiveRecord::Base
   belongs_to :user
   
   before_create :set_default
-  after_update :update_word_count_and_preview, if: :content_changed?  
+  before_update :update_word_count_and_preview, if: :content_changed?  
 
-  # private
+  private
 
   # def attributes
   #   super.merge('temp' => self.temp)
@@ -19,7 +19,8 @@ class Entry < ActiveRecord::Base
     text_arr = self.content.gsub(/<.*?>/,' ').split
     text = text_arr[0...15].join(' ')
     text += ' ...' if text_arr.size > 15
-    self.update_columns(word_count: text_arr.size, preview: text)
+    self.update_columns(word_count: text_arr.size)
+    self.update_columns(preview: text)
   end
 
   def set_default

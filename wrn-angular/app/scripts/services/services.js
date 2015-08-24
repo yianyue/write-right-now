@@ -4,7 +4,7 @@ app.factory('EntryService', ['$resource', function($resource){
   return $resource("http://localhost:3000/api/entries/:id", {}, {
     get: {method: 'GET', cache: false, isArray: true},
     getEntry: {method: 'GET', cache: false, isArray: false},
-    update: {method: 'PUT', cache: false, isArray: false},
+    update: {method: 'PUT', cache: false, isArray: true},
   });
 }]);
 
@@ -40,15 +40,13 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
   };
 
   function lsUpdateEntry(entry){
-    // assume only the last entry gets updated
-    days[days.length-1].entry = entry;
-    // var i = 0;
-      // do {
-      //   if (days[i].entry.id == entry.id){
-      //     days[i].entry = entry;
-      //   }
-      //   i ++;
-      // } while (i < days.length);
+    var i = 0;
+      do {
+        if (days[i].entry && days[i].entry.id == entry.id){
+          days[i].entry = entry;
+        }
+        i ++;
+      } while (i < days.length);
     localStorageService.set('days', days);
   }
   
@@ -72,9 +70,13 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     },
     getEntry: EntryService.getEntry,
     saveEntry: function(entry){
+      // lsUpdateEntry(entry);
       EntryService.update({id: entry.id}, {entry: entry},
         function success(rsp){
-          lsUpdateEntry(rsp);
+          console.log('Success' + JSON.stringify(rsp) );
+          rsp.forEach(function(el, i, arr){
+            lsUpdateEntry(el);
+          });
         },
         function error(rsp){
           console.log('Error' + JSON.stringify(rsp) );
