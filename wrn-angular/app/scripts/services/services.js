@@ -24,7 +24,7 @@ return $resource('http://localhost:3000/api/session', {}, {
 
 app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stats', function (EntryService, UserService, localStorageService, Stats) {
 
-  var days = localStorageService.get('days');;
+  var days = localStorageService.get('days');
 
   function getEntries(complete) {
     EntryService.get({},
@@ -70,7 +70,6 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     },
     getEntry: EntryService.getEntry,
     saveEntry: function(entry){
-      // lsUpdateEntry(entry);
       EntryService.update({id: entry.id}, {entry: entry},
         function success(rsp){
           console.log('Success' + JSON.stringify(rsp) );

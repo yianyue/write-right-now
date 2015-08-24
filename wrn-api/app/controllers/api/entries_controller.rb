@@ -8,18 +8,7 @@ class Api::EntriesController < ApplicationController
     Entry.create(user: current_user) if @entries.empty?
     # TODO: time zone
     @entries << Entry.create(user: current_user) if @entries.last.created_at.to_date < Date.today
-
-    # exclude today
-    total_days = Date.today - @entries.first.created_at.to_date
-    days_completed = @entries.where("word_count >= goal").length
-    num_lock = [@entries.size - 1, total_days-days_completed].min
-    if num_lock > 0
-      (0...num_lock).each{ |i|
-        @entries[i].locked = true
-        @entries[i].save!
-      }
-    end
-
+    Entry.set_lock(@entries)
     render json: @entries.as_json(only: [:id, :created_at, :preview, :word_count, :goal, :locked]), status: 200
   
   end
@@ -34,27 +23,14 @@ class Api::EntriesController < ApplicationController
     end
   end
 
-  # def create
-  #   @entry = current_user.entries.build()
-  #   @entry.save
-  #   render json: @entry
-  # end
-
   def update
     @entries = []
     @entry = Entry.find(params[:id])
     # if @entry.created_at.to_date == Date.today
       @entry.update(entry_params)
       @entries << @entry
-      if @entry.word_count >= @entry.goal
-        @unlock = current_user.entries.order(created_at: :desc).find_by(locked: true)
-        if @unlock
-          @unlock.locked = false
-          @unlock.save
-          @entries << @unlock
-        end
-      end
-    render json: @entries.as_json(only: [:id, :created_at, :preview, :word_count, :goal, :locked])
+      
+      render json: @entries.as_json(only: [:id, :created_at, :preview, :word_count, :goal, :locked]), status: 200
     # else
     #   render json: @entry.as_json(only: [:id, :created_at, :preview, :word_count, :goal, :locked]), status: 401
     # end
