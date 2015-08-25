@@ -26,8 +26,9 @@ class Entry < ActiveRecord::Base
   def set_default
     self.goal = self.user.goal
     self.content = self.content || ''
-    # self.preview = self.preview || ''
-    self.word_count = self.content.gsub(/<.*?>/,' ').split.size
+    self.word_count = 0
+    self.preview = ''
+    # when seeding records, remember to update_word_count_and_preview
   end
 
   def self.set_lock(entries)
