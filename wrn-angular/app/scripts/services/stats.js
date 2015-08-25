@@ -50,8 +50,7 @@ app.factory('Stats', function () {
       labels: []
     };
     days.forEach(function(day, i, days){
-      var date = new Date(day.date);
-      obj.labels[i] = date.toDateString();
+      obj.labels[i] = $.datepicker.formatDate('D M dd', new Date(day.date));
       var words = day.entry ? day.entry.word_count : 0;
       obj.data[0][i] = words;
       sum += words;
