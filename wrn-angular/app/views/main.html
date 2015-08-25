@@ -27,7 +27,7 @@
 <div class="list-group" ng-repeat="day in main.days | orderBy:'date':true">
 
   <div ng-show="day.entry">
-    <div ng-show="day.entry.locked"  class="list-group-item">
+    <div ng-show="day.entry.locked"  class="list-group-item disabled">
       <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }} 
         <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
         </h4>

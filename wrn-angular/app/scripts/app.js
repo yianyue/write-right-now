@@ -34,7 +34,7 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
     // Configure all charts
     ChartJsProvider.setOptions({
       // colours: ['Green', 'Gray'],
-      responsive: false,
+      // responsive: false,
     });
     // Configure all line charts
     ChartJsProvider.setOptions('Line', {

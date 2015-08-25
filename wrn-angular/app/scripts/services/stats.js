@@ -78,6 +78,7 @@ app.factory('Stats', function () {
     getStats: function(days){
       var todayEntry = days[days.length-1].entry;
       var today = { 
+        date: $.datepicker.formatDate('DD, MM dd', new Date()),
         progress: Math.round(todayEntry.word_count/todayEntry.goal* 100),
         data: [todayEntry.word_count, Math.max(todayEntry.goal-todayEntry.word_count, 0)],
         labels: ['Words Written Today', 'Words to Goal']
