@@ -9,6 +9,21 @@
   </ng-quill-editor>
 </div>
 
+<!-- Modal. Trigger on goal-reached -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="successModalLabel">Congratulations!</h4>
+      </div>
+      <div class="modal-body">
+        <p>You've reached today's goal</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <nav class="navbar navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text"><span ng-bind="entry.progress"></span>%</p> 

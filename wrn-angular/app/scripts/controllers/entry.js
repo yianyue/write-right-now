@@ -27,6 +27,12 @@ app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Full
       // TODO: handle error
       ctrl.currentEntry.word_count = ctrl.countWords();
       ctrl.progress = Math.round(ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100);
+      if (ctrl.progress >= 100 && ctrl.displayModal ){
+        $('#successModal').modal('show');
+        ctrl.displayModal = false;
+      } else if (ctrl.progress < 100){
+        ctrl.displayModal = true;
+      };
       Data.saveEntry(ctrl.currentEntry);
     };
 
@@ -48,6 +54,8 @@ app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Full
         function success(rsp){
           ctrl.currentEntry = rsp;
           ctrl.progress = Math.round(ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100);
+          ctrl.displayModal = ctrl.progress < 100;
+          console.log(ctrl.displayModal);
           var entryDate = new Date(ctrl.currentEntry.created_at);
           if (entryDate.setHours(0,0,0,0) == today.setHours(0,0,0,0)){
             ctrl.editor.enable();

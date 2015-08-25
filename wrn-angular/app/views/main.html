@@ -28,23 +28,23 @@
 
   <div ng-show="day.entry">
     <a class="list-group-item" ng-href="#/entries/{{ day.entry.id }}">
-    <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }} <span ng-show="day.entry.locked">locked</span></h4>
-    <div class="progress">
-      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ day.entry.word_count >= day.entry.goal ? 100 : day.entry.word_count/day.entry.goal*100 }}%">
-      <span>{{ day.entry.word_count }}/{{ day.entry.goal }}</span> words
+      <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }} <span ng-show="day.entry.locked">locked</span></h4>
+      <div class="progress">
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ day.entry.word_count >= day.entry.goal ? 100 : day.entry.word_count/day.entry.goal*100 }}%">
+        <span>{{ day.entry.word_count }}/{{ day.entry.goal }}</span> words
+        </div>
       </div>
-    </div>
-    <!-- not using handlebars here to display html -->
-    <p class="text-muted">
-      {{day.entry.preview}}
-    </p>
+      <!-- not using handlebars here to display html -->
+      <p class="text-muted">
+        {{day.entry.preview}}
+      </p>
     </a>
   </div><!-- ng-show -->
 
   <div ng-hide="day.entry">
     <div  class="list-group-item">
       <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }}</h4>
-      You didn't do shit
+      You skipped this day :(
     </div>
   </div><!-- ng-hide -->
 
