@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
 <!-- TODO: Update User Goal -->
 <div ng-controller="UserCtrl as user">
@@ -27,24 +27,43 @@
 <div class="list-group" ng-repeat="day in main.days | orderBy:'date':true">
 
   <div ng-show="day.entry">
-    <a class="list-group-item" ng-href="#/entries/{{ day.entry.id }}">
-      <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }} <span ng-show="day.entry.locked">locked</span></h4>
+    <div ng-show="day.entry.locked"  class="list-group-item">
+      <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }} 
+        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+        </h4>
+        <div class="progress">
+          <div class="progress-bar 
+          ng-class: day.entry.word_count/day.entry.goal >= 1 ? 'progress-bar-success' : 'progress-bar-info'" 
+          role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" 
+          style="width: {{ day.entry.word_count >= day.entry.goal ? 100 : day.entry.word_count/day.entry.goal*100 }}%">
+          <span>{{ day.entry.word_count }} / {{ day.entry.goal }}</span> words
+          </div>
+        </div>
+        <p class="text-muted">
+          {{day.entry.preview}}
+        </p>
+    </div>
+    <a ng-hide="day.entry.locked" class="list-group-item" ng-href="#/entries/{{ day.entry.id }}">
+      <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }}</h4>
       <div class="progress">
-        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ day.entry.word_count >= day.entry.goal ? 100 : day.entry.word_count/day.entry.goal*100 }}%">
-        <span>{{ day.entry.word_count }}/{{ day.entry.goal }}</span> words
+        <div class="progress-bar 
+        ng-class: day.entry.word_count/day.entry.goal >= 1 ? 'progress-bar-success' : 'progress-bar-info'" 
+        role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" 
+        style="width: {{ day.entry.word_count >= day.entry.goal ? 100 : day.entry.word_count/day.entry.goal*100 }}%">
+        <span>{{ day.entry.word_count }} / {{ day.entry.goal }}</span> words
         </div>
       </div>
-      <!-- not using handlebars here to display html -->
       <p class="text-muted">
         {{day.entry.preview}}
       </p>
     </a>
+    
   </div><!-- ng-show -->
 
   <div ng-hide="day.entry">
     <div  class="list-group-item">
       <h4 class="list-group-item-heading">{{ day.date | date:"MMM d, y" }}</h4>
-      You skipped this day :(
+      You skipped :(
     </div>
   </div><!-- ng-hide -->
 

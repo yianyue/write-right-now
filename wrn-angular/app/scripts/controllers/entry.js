@@ -47,7 +47,6 @@ app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Full
 
     $scope.$on('editorCreated', function (event, args) {
       ctrl.editor = args.editor;
-      // enable edit only if entry date is today
       // TODO: check if user can game this by changing their computer's date
       var today = new Date();
       Data.getEntry({id: $routeParams.id},
@@ -55,13 +54,13 @@ app.controller('EntryCtrl', ['$routeParams', '$location','$scope', 'Data', 'Full
           ctrl.currentEntry = rsp;
           ctrl.progress = Math.round(ctrl.currentEntry.word_count/ctrl.currentEntry.goal* 100);
           ctrl.displayModal = ctrl.progress < 100;
-          console.log(ctrl.displayModal);
+          
           var entryDate = new Date(ctrl.currentEntry.created_at);
           if (entryDate.setHours(0,0,0,0) == today.setHours(0,0,0,0)){
             ctrl.editor.enable();
-          }
-          // focus the editor and go to the end of the text
-          ctrl.editor.quill.setSelection(ctrl.editor.length, ctrl.editor.length);
+            // focus the editor and go to the end of the text
+            ctrl.editor.quill.setSelection(ctrl.editor.length, ctrl.editor.length);
+          };
         },
         function error(rsp){
           console.log('Error' + JSON.stringify(rsp) );
