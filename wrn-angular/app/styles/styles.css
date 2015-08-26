@@ -6808,14 +6808,11 @@ body {
   font-size: 32px;
 }
 /* progress bar */
-.main .progress {
-  height: 100px;
-  line-height: 100px;
+.list-group .progress {
+  height: 40px;
 }
-.main .progress .progress-bar {
+.list-group .progress .progress-bar {
+  padding-top: 10px;
   display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
-  text-align: left;
-  padding: 15px;
+  font-size: 20px;
 }
