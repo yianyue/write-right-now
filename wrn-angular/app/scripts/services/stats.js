@@ -2,9 +2,7 @@
 
 // Service to compile user statistics
 
-app.factory('Stats', ['localStorageService', function (localStorageService) {
-
-  // var days = localStorageService.get('days')
+app.factory('Stats', function () {
 
   function getDates(startDate, endDate){
     var dateArr = [];
@@ -52,8 +50,7 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
       labels: []
     };
     days.forEach(function(day, i, days){
-      var date = new Date(day.date);
-      obj.labels[i] = date.toDateString();
+      obj.labels[i] = $.datepicker.formatDate('D M dd', new Date(day.date));
       var words = day.entry ? day.entry.word_count : 0;
       obj.data[0][i] = words;
       sum += words;
@@ -76,26 +73,22 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
           }
         });
       });
-      console.log(days);
       return days;
     },
     getStats: function(days){
       var todayEntry = days[days.length-1].entry;
       var today = { 
+        date: $.datepicker.formatDate('DD, MM dd', new Date()),
         progress: Math.round(todayEntry.word_count/todayEntry.goal* 100),
         data: [todayEntry.word_count, Math.max(todayEntry.goal-todayEntry.word_count, 0)],
         labels: ['Words Written Today', 'Words to Goal']
       };
       var completion = {
         totalDays: days.length,
-        labels: ['Days of Victory','Days You Tried', 'Days Skipped']
+        labels: ['Days Completed','Days You Tried', 'Days Skipped']
       };
       jQuery.extend(completion,calcCompleted(days) );
-      var words = {
-        labels: [],
-        data:[]
-      };
-      jQuery.extend(words,calcWordStats(days))
+      var words = calcWordStats(days);
       return {
         today: today,
         completion: completion,
@@ -104,4 +97,4 @@ app.factory('Stats', ['localStorageService', function (localStorageService) {
     }        
   };
 
-}]);
+});

@@ -1,1 +1,0 @@
-json.(@user, :name, :token)

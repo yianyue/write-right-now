@@ -15,6 +15,7 @@ app.controller('StatsCtrl', ['Data','Stats','$scope', function (Data, Stats, $sc
 
   Data.loadEntries(function(days){
     ctrl.dt = Stats.getStats(days);
+    console.log(ctrl.dt);
   });
 
 

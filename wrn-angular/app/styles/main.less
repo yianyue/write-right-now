@@ -1,0 +1,75 @@
+@import "../../bower_components/bootstrap/less/bootstrap.less";
+
+@import url(http://fonts.googleapis.com/css?family=Bevan|Monofett);
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('./fonts/glyphicons-halflings-regular.eot');
+  src: url('./fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('./fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('./fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/*@brand-primary:         darken(#428bca, 6.5%); // #337ab7
+@brand-success:         #5cb85c;
+@brand-info:            #5bc0de;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;*/
+
+/* robin's egg blue */
+@main-color: #00CCCC;
+/* irish green */
+@brand-success: #009E60;
+/* unmellow yellow */
+@brand-info: #FFFF66;
+/* hot pink */
+@brand-warning: #D11565;
+@brand-danger: @gray;
+
+@link-color: @gray;
+
+@navbar-default-bg: @main-color;
+@navbar-default-link-color: @gray-lighter;
+
+@nav-link-hover-bg: transparent;
+
+/* padding for fixed nav bar*/
+body {
+  padding: 70px;
+}
+
+/* styles for the ql-editor */
+.ql-editor {
+  padding: 0 3em;
+  font-size: 2em;
+  font-family: Garamond;
+}
+
+/* hide nav bar */
+.fs-navbar {
+  opacity:0.0;
+  transition:1s;
+}
+
+.fs-navbar:hover{
+  opacity:1.0;
+}
+
+/* style the navbar brand */
+.navbar-brand {
+/*  font-family: Bevan;
+  font-size: 22px;
+  text-shadow: 3px 2px 0 @main-color,5px 4px 0 @gray;
+*/
+  font-family: Monofett; 
+  color: black !important; 
+  font-size: 32px
+}
+
+/* progress bar */
+.list-group .progress {
+  height: 40px;  
+  .progress-bar {
+    padding-top:10px; 
+    display:inline-block;
+    font-size: 20px;      
+  }
+}

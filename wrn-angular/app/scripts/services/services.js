@@ -4,7 +4,7 @@ app.factory('EntryService', ['$resource', function($resource){
   return $resource("http://localhost:3000/api/entries/:id", {}, {
     get: {method: 'GET', cache: false, isArray: true},
     getEntry: {method: 'GET', cache: false, isArray: false},
-    update: {method: 'PUT', cache: false, isArray: false},
+    update: {method: 'PUT', cache: false, isArray: true},
   });
 }]);
 
@@ -24,12 +24,11 @@ return $resource('http://localhost:3000/api/session', {}, {
 
 app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stats', function (EntryService, UserService, localStorageService, Stats) {
 
-  var days = localStorageService.get('days');;
+  var days = localStorageService.get('days');
 
   function getEntries(complete) {
     EntryService.get({},
       function success(rsp){
-        console.log(rsp);
         days = Stats.matchEntriesToDates(rsp);
         localStorageService.set('days', days);
         complete(days);
@@ -41,15 +40,13 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
   };
 
   function lsUpdateEntry(entry){
-    // assume only the last entry gets updated
-    days[days.length-1].entry = entry;
-    // var i = 0;
-      // do {
-      //   if (days[i].entry.id == entry.id){
-      //     days[i].entry = entry;
-      //   }
-      //   i ++;
-      // } while (i < days.length);
+    var i = 0;
+      do {
+        if (days[i].entry && days[i].entry.id == entry.id){
+          days[i].entry = entry;
+        }
+        i ++;
+      } while (i < days.length);
     localStorageService.set('days', days);
   }
   
@@ -75,7 +72,10 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     saveEntry: function(entry){
       EntryService.update({id: entry.id}, {entry: entry},
         function success(rsp){
-          lsUpdateEntry(rsp);
+          console.log('Success', rsp );
+          rsp.forEach(function(el, i, arr){
+            lsUpdateEntry(el);
+          });
         },
         function error(rsp){
           console.log('Error' + JSON.stringify(rsp) );
