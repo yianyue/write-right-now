@@ -3374,26 +3374,26 @@ fieldset[disabled] .btn-warning.active {
 }
 .btn-danger {
   color: #ffffff;
-  background-color: #222222;
-  border-color: #161616;
+  background-color: #555555;
+  border-color: #494949;
 }
 .btn-danger:focus,
 .btn-danger.focus {
   color: #ffffff;
-  background-color: #090909;
-  border-color: #000000;
+  background-color: #3c3c3c;
+  border-color: #090909;
 }
 .btn-danger:hover {
   color: #ffffff;
-  background-color: #090909;
-  border-color: #000000;
+  background-color: #3c3c3c;
+  border-color: #2a2a2a;
 }
 .btn-danger:active,
 .btn-danger.active,
 .open > .dropdown-toggle.btn-danger {
   color: #ffffff;
-  background-color: #090909;
-  border-color: #000000;
+  background-color: #3c3c3c;
+  border-color: #2a2a2a;
 }
 .btn-danger:active:hover,
 .btn-danger.active:hover,
@@ -3405,8 +3405,8 @@ fieldset[disabled] .btn-warning.active {
 .btn-danger.active.focus,
 .open > .dropdown-toggle.btn-danger.focus {
   color: #ffffff;
-  background-color: #000000;
-  border-color: #000000;
+  background-color: #2a2a2a;
+  border-color: #090909;
 }
 .btn-danger:active,
 .btn-danger.active,
@@ -3431,11 +3431,11 @@ fieldset[disabled] .btn-danger:active,
 .btn-danger.disabled.active,
 .btn-danger[disabled].active,
 fieldset[disabled] .btn-danger.active {
-  background-color: #222222;
-  border-color: #161616;
+  background-color: #555555;
+  border-color: #494949;
 }
 .btn-danger .badge {
-  color: #222222;
+  color: #555555;
   background-color: #ffffff;
 }
 .btn-link {
@@ -4931,11 +4931,11 @@ a.label:focus {
   background-color: #a3104f;
 }
 .label-danger {
-  background-color: #222222;
+  background-color: #555555;
 }
 .label-danger[href]:hover,
 .label-danger[href]:focus {
-  background-color: #090909;
+  background-color: #3c3c3c;
 }
 .badge {
   display: inline-block;
@@ -5203,7 +5203,7 @@ a.thumbnail.active {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-danger {
-  background-color: #222222;
+  background-color: #555555;
 }
 .progress-striped .progress-bar-danger {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -6809,13 +6809,13 @@ body {
 }
 /* progress bar */
 .main .progress {
-  height: 60px;
-  line-height: 60px;
+  height: 100px;
+  line-height: 100px;
 }
 .main .progress .progress-bar {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
   text-align: left;
-  padding: 10px;
+  padding: 15px;
 }
