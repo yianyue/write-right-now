@@ -46,6 +46,9 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
     // Irish green, light gray, and a hot pink
     Chart.defaults.global.colours = ['#009E60', '#DCDCDC', '#D11565'];
     Chart.defaults.global.scaleFontFamily =["Josefin Sans","Helvetica Neue", 'Helvetica', 'Arial','sans-serif'];
+    Chart.defaults.global.tooltipFontFamily=["Josefin Sans","Helvetica Neue", 'Helvetica', 'Arial','sans-serif'];
+    Chart.defaults.global.scaleFontSize= 16;
+    Chart.defaults.global.tooltipFontSize = 18;
   }])
 
 // Interceptor to send user token and email with every request

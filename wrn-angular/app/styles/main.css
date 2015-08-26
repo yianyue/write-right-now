@@ -6836,7 +6836,8 @@ body {
 }
 /* progress bar & list -group */
 .main.list-group .progress {
-  height: 5px;
+  height: 7px;
+  border-radius: 0px;
   clear: both;
 }
 .main.list-group .list-group-item {
@@ -6877,6 +6878,7 @@ body {
   -webkit-transition: visibility opacity 0.2s;
   font-size: 30px;
   font-family: Garamond, Georgia, "Times New Roman", Times, serif;
+  text-align: center;
 }
 .well {
   background-color: transparent;

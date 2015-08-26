@@ -4,15 +4,15 @@
 <div ng-controller="UserCtrl as user">
   <div class="page-header"><h1>{{ $root.currentUser.name }}'s Entries</h1>
   
-  <h2><small>Daily goal: {{ $root.currentUser.goal }} words
+  <h3>Daily goal: {{ $root.currentUser.goal }} words
     <span class="glyphicon glyphicon-edit" aria-hidden="true" aria-pressed="false" autocomplete="off" aria-label="Edit"
     data-toggle="collapse" data-target="#goalInput" aria-expanded="false" aria-controls="goalInput"></span>
-  </small></h2>
+  </h3>
 
   <div class="collapse" id="goalInput">
     <div class="well well-sm">
       <form name="goal" class="form-inline" ng-model-options="{ updateOn: 'blur' }">
-        <label for="goal">Edit Daily Goal</label>
+        <label for="goal">Edit Daily Goal</label> 
         <input name="goal"
               class="form-control" 
               ng-model="$root.currentUser.goal"

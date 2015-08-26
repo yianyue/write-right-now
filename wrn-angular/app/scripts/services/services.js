@@ -76,7 +76,7 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     getEntry: EntryService.getEntry,
     saveEntry: function(entry){
       lsUpdateEntry(entry);
-      EntryService.update({entry: entry},
+      EntryService.update({id: entry.id},{entry: entry},
         function success(rsp){
           rsp.forEach(function(el, i, arr){
             lsUpdateEntry(el);
@@ -88,7 +88,7 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     },
     updateUser: function(user){
       localStorageService.set('user', user);
-      UserService.user.update({id: user.id}, {user: user},
+      UserService.user.update({user: user},
         function success(rsp){
           console.log('user updated' + JSON.stringify(rsp));
         },
