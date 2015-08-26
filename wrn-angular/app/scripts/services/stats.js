@@ -85,7 +85,7 @@ app.factory('Stats', function () {
       };
       var completion = {
         totalDays: days.length,
-        labels: ['Days of Victory','Days You Tried', 'Days Skipped']
+        labels: ['Days Completed','Days You Tried', 'Days Skipped']
       };
       jQuery.extend(completion,calcCompleted(days) );
       var words = calcWordStats(days);

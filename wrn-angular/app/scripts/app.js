@@ -41,8 +41,9 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
       // datasetFill: false
     });
     ChartJsProvider.setOptions('Doughnut',{
-      percentageInnerCutout : 75
+      percentageInnerCutout : 75,
     });
+    Chart.defaults.global.colours = ['#009E60', '#DCDCDC', '#D11565'];
   }])
 
 // Interceptor to send user token and email with every request

@@ -1,49 +1,54 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="page-header">
       <h1>Today <small>{{stats.dt.today.date}}</small></h1>
     </div>
-      <div class="col-md-6 col-xs-6">
+      <div class="col-md-4 col-xs-4">
         <ul class="list-group">
-          <li class="list-group-item"><h2>{{stats.dt.today.progress}}% <small>completed</small></h2></li>
-          <li class="list-group-item"><h2>{{stats.dt.today.data[0]}} <small>words written</small></h2></li>
-          <li class="list-group-item"><h2>{{stats.dt.today.data[1]}} <small>words to goal</small></h2></li>
+          <li class="list-group-item"><h2><small>Progress</small> {{stats.dt.today.progress}}%</h2></li>
+          <li class="list-group-item"><h2><small>Words Written</small> {{stats.dt.today.data[0]}}</h2></li>
+          <li class="list-group-item"><h2><small>Words to Goal</small> {{stats.dt.today.data[1]}}</h2></li>
         </ul>
       </div>
       <div class="col-md-6 col-xs-6">
-        <canvas id="doughnut" class="chart chart-doughnut" 
+        <canvas id="doughnut" 
+          legend="true"
+          class="chart chart-doughnut" 
           data="stats.dt.today.data"
           labels="stats.dt.today.labels">
         </canvas>
       </div>
   </div>
+
   <div class="row">
     <div class="page-header">
       <h1>Overview <small>of the last {{stats.dt.completion.totalDays}} days</small></h1>
     </div>
-    <div class="col-md-6 col-xs-6">
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <tr>
-            <td><small>Longest Streak</small></td>
-            <td>{{stats.dt.completion.streak}} days</td>
-          </tr>
-        </table>
+    <div class="col-md-4 col-xs-4">
+      <ul class="list-group">
+        <li class="list-group-item"><h2><small>Longest Streak </small>{{stats.dt.completion.streak}} Days</h2></li>
+        <li class="list-group-item"><h2><small>Total Written </small>{{stats.dt.words.totalWords}} Words</h2></li>
+        <li class="list-group-item"><h2><small>Daily Average </small>{{stats.dt.words.dailyAvg}} Words</h2></li>
+      </ul>
+    </div>
+     <div class="col-md-6 col-xs-6">
+        <canvas id="pie" 
+        legend="true"
+        class="chart chart-pie" 
+        data="stats.dt.completion.data"
+        labels="stats.dt.completion.labels">
+        </canvas>
       </div>
+  </div>
+
+  <div class="row">
+    <div class="page-header">
+      <h1>Word Count <small>over time</small></h1>
+    </div>
+    <div class="col-md-12">
+      <canvas id="line" class="chart chart-line" data="stats.dt.words.data" labels="stats.dt.words.labels">
+      </canvas>
     </div>
   </div>
+
 </div>
-  
-
-
-<br />
-<canvas id="pie" class="chart chart-pie" data="stats.dt.completion.data"
-  labels="stats.dt.completion.labels"></canvas> 
-
-<h2>Word Count</h2>
-total words written: {{stats.dt.words.totalWords}} words
-<br />
-daily avearge: {{stats.dt.words.dailyAvg}} words
-<canvas id="line" class="chart chart-line" data="stats.dt.words.data"
-  labels="stats.dt.words.labels">
-</canvas>
