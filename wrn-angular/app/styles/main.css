@@ -1092,7 +1092,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #2f2f2f;
+  color: #00cccc;
   text-decoration: underline;
 }
 a:focus {
@@ -3460,7 +3460,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #2f2f2f;
+  color: #00cccc;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4773,7 +4773,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   z-index: 3;
-  color: #2f2f2f;
+  color: #00cccc;
   background-color: #eeeeee;
   border-color: #dddddd;
 }
@@ -6853,6 +6853,9 @@ body {
 .list-group .list-group-item h3 {
   display: inline-block;
 }
+.list-group .list-group-item h3 span {
+  color: #d11565;
+}
 .list-group .list-group-item h3:nth-child(1) {
   float: left;
 }
@@ -6860,11 +6863,7 @@ body {
 .list-group .list-group-item h3:nth-child(2) {
   float: right;
 }
-.list-group-item:hover .preview {
-  visibility: visible;
-  opacity: 1;
-}
-.preview {
+.list-group .list-group-item .preview {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -6879,9 +6878,19 @@ body {
   font-size: 30px;
   font-family: Garamond, Georgia, "Times New Roman", Times, serif;
   text-align: center;
+  overflow: hidden;
 }
+.list-group-item:hover .preview {
+  visibility: visible;
+  opacity: 1;
+}
+/* for editing daily goal */
 .well {
   background-color: transparent;
   border: none;
   box-shadow: none;
+}
+/* modal */
+.modal-content {
+  text-align: center;
 }
