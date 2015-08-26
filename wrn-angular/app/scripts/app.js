@@ -43,6 +43,7 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
     ChartJsProvider.setOptions('Doughnut',{
       percentageInnerCutout : 75,
     });
+    // Irish green, light gray, and a hot pink
     Chart.defaults.global.colours = ['#009E60', '#DCDCDC', '#D11565'];
   }])
 

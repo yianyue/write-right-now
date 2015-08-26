@@ -8,11 +8,20 @@
   src: url('./fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('./fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('./fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-/*@brand-primary:         darken(#428bca, 6.5%); // #337ab7
+/*
+@gray-base:              #000;
+@gray-darker:            lighten(@gray-base, 13.5%); // #222
+@gray-dark:              lighten(@gray-base, 20%);   // #333
+@gray:                   lighten(@gray-base, 33.5%); // #555
+@gray-light:             lighten(@gray-base, 46.7%); // #777
+@gray-lighter:           lighten(@gray-base, 93.5%); // #eee
+
+@brand-primary:         darken(#428bca, 6.5%); // #337ab7
 @brand-success:         #5cb85c;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
-@brand-danger:          #d9534f;*/
+@brand-danger:          #d9534f;
+*/
 
 /* robin's egg blue */
 @main-color: #00CCCC;
@@ -64,12 +73,34 @@ body {
   font-size: 32px
 }
 
-/* progress bar */
-.list-group .progress {
-  height: 40px;  
-  .progress-bar {
+/* progress bar & list -group */
+.main.list-group {
+
+  .progress{
+    height: 5px; 
+    clear: both; 
+  }
+
+  .list-group-item{
+    border: none;
+  }
+
+  h3{
+    display: inline-block;    
+    outline: solid red;
+  }
+  h3:nth-child(1){
+    float: left;
+  }
+  h3:nth-child(2){
+   float: right;
+  }
+
+/*  .progress-bar {
     padding-top:10px; 
     display:inline-block;
     font-size: 20px;      
-  }
+  }*/
 }
+
+
