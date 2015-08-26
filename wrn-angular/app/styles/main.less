@@ -1,6 +1,6 @@
 @import "../../bower_components/bootstrap/less/bootstrap.less";
 
-@import url(http://fonts.googleapis.com/css?family=Monofett);
+@import url(http://fonts.googleapis.com/css?family=Monofett|Josefin+Sans);
 /*Bevan|Rock+Salt*/
 
 @font-face {
@@ -12,7 +12,7 @@
 /*Typography
 ## Font, line-height, and color for body text, headings, and more.
 */
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  "Josefin Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Garamond, Georgia, "Times New Roman", Times, serif;
 @font-family-base:        @font-family-sans-serif;
 
@@ -63,8 +63,6 @@
 
 @nav-link-hover-bg: transparent;
 
-@border-radius-base:        0px;
-
 /* padding for fixed nav bar*/
 body {
   padding: 70px;
@@ -108,6 +106,7 @@ body {
 
   .list-group-item{
     border: none;
+    border-radius: 0px;
   }
 
 }
@@ -145,8 +144,14 @@ body {
   color: white;
   visibility: hidden;
   opacity: 0;
-  padding: 0.5em 1em ;
+  padding: 0.75em 6.5em ;
   -webkit-transition: visibility opacity 0.2s;
   font-size: @font-size-h2;
   font-family: @font-family-serif;
+}
+
+.well {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
