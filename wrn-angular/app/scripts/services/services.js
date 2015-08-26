@@ -43,6 +43,7 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     var i = 0;
       do {
         if (days[i].entry && days[i].entry.id == entry.id){
+          entry.progress = Math.round(entry.word_count/entry.goal*100);
           days[i].entry = entry;
         }
         i ++;
@@ -70,9 +71,9 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     },
     getEntry: EntryService.getEntry,
     saveEntry: function(entry){
+      lsUpdateEntry(entry);
       EntryService.update({id: entry.id}, {entry: entry},
         function success(rsp){
-          console.log('Success', rsp );
           rsp.forEach(function(el, i, arr){
             lsUpdateEntry(el);
           });

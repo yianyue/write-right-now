@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-@import url(http://fonts.googleapis.com/css?family=Bevan|Monofett);
+@import url(http://fonts.googleapis.com/css?family=Monofett);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -6765,12 +6765,30 @@ button.close {
     display: none !important;
   }
 }
+/*Bevan|Rock+Salt*/
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('fonts/glyphicons-halflings-regular.eot');
   src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
-/*
+/*Typography
+## Font, line-height, and color for body text, headings, and more.
+*/
+/** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+@font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+
+@font-size-base:          14px;
+@font-size-large:         ceil((@font-size-base * 1.25)); // ~18px
+@font-size-small:         ceil((@font-size-base * 0.85)); // ~12px
+
+@font-size-h1:            floor((@font-size-base * 2.6)); // ~36px
+@font-size-h2:            floor((@font-size-base * 2.15)); // ~30px
+@font-size-h3:            ceil((@font-size-base * 1.7)); // ~24px
+@font-size-h4:            ceil((@font-size-base * 1.25)); // ~18px
+@font-size-h5:            @font-size-base;
+@font-size-h6:            ceil((@font-size-base * 0.85)); // ~12px
+
+/* Colours
 @gray-base:              #000;
 @gray-darker:            lighten(@gray-base, 13.5%); // #222
 @gray-dark:              lighten(@gray-base, 20%);   // #333
@@ -6796,7 +6814,7 @@ body {
 .ql-editor {
   padding: 0 3em;
   font-size: 2em;
-  font-family: Garamond;
+  font-family: Garamond, Georgia, "Times New Roman", Times, serif;
 }
 /* hide nav bar */
 .fs-navbar {
@@ -6813,17 +6831,10 @@ body {
   text-shadow: 3px 2px 0 @main-color,5px 4px 0 @gray;
 */
   font-family: Monofett;
-  color: black !important;
-  font-size: 32px;
+  color: #222222 !important;
+  font-size: 36px;
 }
 /* progress bar & list -group */
-.main.list-group {
-  /*  .progress-bar {
-    padding-top:10px; 
-    display:inline-block;
-    font-size: 20px;      
-  }*/
-}
 .main.list-group .progress {
   height: 5px;
   clear: both;
@@ -6831,13 +6842,18 @@ body {
 .main.list-group .list-group-item {
   border: none;
 }
-.main.list-group h3 {
-  display: inline-block;
-  outline: solid red;
+.list-group .list-group-item {
+  overflow: auto;
+  clear: both;
+  /* Date */
+  /* Percentage */
 }
-.main.list-group h3:nth-child(1) {
+.list-group .list-group-item h3 {
+  display: inline-block;
+}
+.list-group .list-group-item h3:nth-child(1) {
   float: left;
 }
-.main.list-group h3:nth-child(2) {
+.list-group .list-group-item h3:nth-child(2) {
   float: right;
 }

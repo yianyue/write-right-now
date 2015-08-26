@@ -33,8 +33,8 @@ app.config(['localStorageServiceProvider', function(localStorageServiceProvider)
 app.config(['ChartJsProvider', function (ChartJsProvider) {
     // Configure all charts
     ChartJsProvider.setOptions({
-      // colours: ['Green', 'Gray'],
       // responsive: false,
+      bezierCurve : false,
     });
     // Configure all line charts
     ChartJsProvider.setOptions('Line', {

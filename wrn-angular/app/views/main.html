@@ -29,7 +29,7 @@
   <div ng-show="day.entry">
 
     <a class="list-group-item" ng-hide="day.entry.locked" ng-href="#/entries/{{ day.entry.id }}">
-      <h3>{{ day.date | date:"MMM d, y" }}</h3>
+      <h3><small>{{ day.date | date:"MMM d, y" }}</small></h3>
       <h3>{{day.entry.progress}}%</h3>
       <div class="progress">      
         <div class="progress-bar 
@@ -43,7 +43,7 @@
     </a>
 
     <div class="list-group-item" ng-show="day.entry.locked">
-      <h3>{{ day.date | date:"MMM d, y" }} <span class="glyphicon glyphicon-lock" aria-hidden="true"></span></h3>
+      <h3><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> <small>{{ day.date | date:"MMM d, y" }}</small></h3>
       <h3>{{day.entry.progress}}%</h3>
       <div class="progress">
         <div class="progress-bar 
@@ -59,7 +59,7 @@
 
   <div ng-hide="day.entry">
     <div class="list-group-item">
-      <h3>{{ day.date | date:"MMM d, y" }}</h3>
+      <h3><small>{{ day.date | date:"MMM d, y" }}</small></h3>
       <h3>0%</h3>
       <div class="progress">      
         <div class="progress-bar"  
