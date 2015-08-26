@@ -70,6 +70,7 @@ app.factory('Stats', function () {
           var date = new Date(day.date);
           if(entryDate.setHours(0,0,0,0) == day.date.setHours(0,0,0,0)){
             day.entry = entry;
+            day.entry.progress = Math.round(entry.word_count/entry.goal*100);
           }
         });
       });
