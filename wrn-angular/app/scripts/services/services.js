@@ -9,7 +9,8 @@ app.factory('EntryService', ['$resource', function($resource){
 }]);
 
 app.factory('UserService', ['$resource', function($resource){
-  return $resource('http://localhost:3000/api/users', {}, {
+  return $resource('http://localhost:3000/api/user', {}, {
+    // TODO: save to api/users
     save: {method: 'POST', cache: false, isArray: false},
     update: {method: 'PUT', cache: false, isArray: false},
   });
@@ -72,7 +73,7 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     getEntry: EntryService.getEntry,
     saveEntry: function(entry){
       lsUpdateEntry(entry);
-      EntryService.update({id: entry.id}, {entry: entry},
+      EntryService.update({entry: entry},
         function success(rsp){
           rsp.forEach(function(el, i, arr){
             lsUpdateEntry(el);
@@ -83,7 +84,14 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
       });
     },
     updateUser: function(user){
-      // localStorageService.set('user', user);
+      localStorageService.set('user', user);
+      UserService.update({id: user.id}, {user: user},
+        function success(rsp){
+          console.log('user updated' + JSON.stringify(rsp));
+        },
+        function error(rsp){
+          console.log('Error' + JSON.stringify(rsp) );
+        });
     }
   };
 

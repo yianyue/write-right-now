@@ -38,6 +38,10 @@ app.controller('UserCtrl', ['UserService', 'SessionService', 'Data', 'Stats', '$
   ctrl.register = function(){
     // Have to send the info back with a user key, otherwise the password and password_confirmation doesn't get saved
     UserService.save({user: ctrl.info}, success, error);
+  };
+
+  ctrl.updateGoal = function(){
+    Data.updateUser($rootScope.currentUser);
   }
 
 }]);

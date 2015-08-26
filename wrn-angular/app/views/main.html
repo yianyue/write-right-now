@@ -2,9 +2,9 @@
 
 <!-- TODO: Update User Goal -->
 <div ng-controller="UserCtrl as user">
-  <div class="page-header"><h1>{{ $root.currentUser.name }}'s Entries</h1></div>
+  <div class="page-header"><h1>{{ $root.currentUser.name }}'s Entries</h1>
   
-<!--   <p>Daily goal: {{ $root.currentUser.goal }} words
+  <p>Daily goal: {{ $root.currentUser.goal }} words
   <span class="input-btn">
     <button class="btn" aria-pressed="false" autocomplete="off" aria-label="Edit"
     data-toggle="collapse" data-target="#goalInput" aria-expanded="false" aria-controls="goalInput">Change Goal</button>
@@ -17,12 +17,12 @@
         <label for="goal">Goal</label>
         <input name="goal"
               class="form-control" 
-              ng-model="user.info.goal"
+              ng-model="$root.currentUser.goal"
               ng-change="user.updateGoal()">
       </form>
     </div>
-  </div> -->
-
+  </div>
+</div>
 
 <div class="main list-group" ng-repeat="day in main.days | orderBy:'date':true">
 
