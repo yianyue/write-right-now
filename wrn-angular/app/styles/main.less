@@ -63,6 +63,8 @@
 
 @nav-link-hover-bg: transparent;
 
+@border-radius-base:        0px;
+
 /* padding for fixed nav bar*/
 body {
   padding: 70px;
@@ -71,7 +73,7 @@ body {
 /* styles for the ql-editor */
 .ql-editor {
   padding: 0 3em;
-  font-size: 2em;
+  font-size: @font-size-h3;
   font-family: @font-family-serif;
 }
 
@@ -93,7 +95,7 @@ body {
 */
   font-family: Monofett; 
   color: @gray-darker !important; 
-  font-size: 36px
+  font-size: @font-size-h1;
 }
 
 /* progress bar & list -group */
@@ -123,10 +125,28 @@ body {
     float: left;
   }
   /* Percentage */
-  h3:nth-child(2){
+  p, h3:nth-child(2){
     float: right;
   }
-
 }
 
+.list-group-item:hover .preview {
+  visibility: visible;
+  opacity: 1;
+}
 
+.preview {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: fade(@gray-darker, 80%);
+  color: white;
+  visibility: hidden;
+  opacity: 0;
+  padding: 0.5em 1em ;
+  -webkit-transition: visibility opacity 0.2s;
+  font-size: @font-size-h2;
+  font-family: @font-family-serif;
+}

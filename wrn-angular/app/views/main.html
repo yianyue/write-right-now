@@ -38,8 +38,8 @@
         style="width: {{ day.entry.progress > 100 ? 100 : day.entry.progress }}%">
         </div>
       </div><!-- progress -->
-      <span>{{ day.entry.word_count }} / {{ day.entry.goal }}</span> words
-      <p class="text-muted">{{day.entry.preview}}</p>
+      <p><span>{{ day.entry.word_count }} / {{ day.entry.goal }}</span> words</p>
+      <div class="preview">{{day.entry.preview}}</div>
     </a>
 
     <div class="list-group-item" ng-show="day.entry.locked">
@@ -51,8 +51,8 @@
         role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" 
         style="width: {{ day.entry.progress > 100 ? 100 : day.entry.word_count/day.entry.goal*100 }}%"></div>
       </div><!-- progress -->
-      <span>{{ day.entry.word_count }} / {{ day.entry.goal }}</span> words
-      <p class="text-muted">{{day.entry.preview}}</p>
+      <p><span>{{ day.entry.word_count }} / {{ day.entry.goal }}</span> words</p>
+      <div class="preview">{{day.entry.preview}}</div>
     </div>
     
   </div><!-- ng-show -->
@@ -67,7 +67,7 @@
         style="width: 0%">
         </div>
       </div><!-- progress -->
-      <p class="text-muted">You skipped :(</p>
+      <p>You skipped :(</p>
     </div>
   </div><!-- ng-hide -->
 
