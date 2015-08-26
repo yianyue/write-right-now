@@ -48,6 +48,7 @@
 
 /* robin's egg blue */
 @main-color: #00CCCC;
+@brand-primary: @main-color;
 /* irish green */
 @brand-success: #009E60;
 /* unmellow yellow */
@@ -57,20 +58,20 @@
 @brand-danger: @gray;
 
 @link-color: @gray;
+@link-hover-color: @main-color;
 
 @navbar-default-bg: @main-color;
 @navbar-default-link-color: @gray-lighter;
-@link-hover-color: @main-color;
 @nav-link-hover-bg: transparent;
 
 /* padding for fixed nav bar*/
 body {
-  padding: 70px;
+  padding: 70px 190px;
 }
 
 /* styles for the ql-editor */
 .ql-editor {
-  padding: 0 3em;
+  /*padding: 0 3em;*/
   font-size: @font-size-h3;
   font-family: @font-family-serif;
 }
@@ -93,7 +94,9 @@ body {
 */
   font-family: Monofett; 
   color: @gray-darker !important; 
-  font-size: @font-size-h1;
+  font-size: 50px;
+  line-height: 33px;
+  padding: 20px 35px;
 }
 
 /* entry list and stats table */
