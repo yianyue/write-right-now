@@ -31,12 +31,12 @@
             <a class="navbar-brand" href="/#/">Write<br>Right<br>Now</a>          
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li ng-show="!$root.currentUser"><a href="/#/login">Login</a></li>
-            <li ng-show="!$root.currentUser"><a href="/#/register">Register</a></li>
+            <li ng-show="!$root.currentUser"><a href="/#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li ng-show="!$root.currentUser"><a href="/#/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
             <li ng-show="$root.currentUser"><a href="/#/stats">
                 <span class="glyphicon glyphicon-stats"></span> Stats</a></li>
             <li ng-show="$root.currentUser" ng-controller="UserCtrl as user"><a href="" ng-click="user.logout()">
-                <span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div><!-- container-fluid -->
     </nav>
