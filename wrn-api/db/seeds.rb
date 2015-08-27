@@ -12,7 +12,7 @@ Entry.delete_all
 
 users = User.create([
   {
-    name: 'Yian', 
+    name: 'Yi An', 
     email: 'yianyue@gmail.com', 
     goal: 2, 
     password: 'password', 
@@ -415,6 +415,7 @@ contents_1.each_index{|i|
   e.save
   e.update_word_count_and_preview
 }
+
 contents_2 = contents_2.reverse
 contents_2.each_index{|i|
   e = Entry.create(user: User.second, content: contents_2[i])

@@ -6819,17 +6819,13 @@ body {
 /* hide nav bar */
 .fs-navbar {
   opacity: 0.0;
-  transition: 1s;
+  transition: 2s;
 }
 .fs-navbar:hover {
   opacity: 1.0;
 }
 /* style the navbar brand */
 .navbar-brand {
-  /*  font-family: Bevan;
-  font-size: 22px;
-  text-shadow: 3px 2px 0 @main-color,5px 4px 0 @gray;
-*/
   font-family: Monofett;
   color: #222222 !important;
   font-size: 42px;
@@ -6894,6 +6890,18 @@ body {
   box-shadow: none;
 }
 /* modal */
+@keyframes star-animation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.modal-body span {
+  /*color: @brand-success;*/
+  /*animation: star-animation 2s infinite  alternate backwards;*/
+}
 .modal-content {
   text-align: center;
 }
