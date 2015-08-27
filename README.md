@@ -1,4 +1,3 @@
-
 # Write Right Now
 
 Distraction-free writing app that motivates users to meet their writing goal.
@@ -18,13 +17,13 @@ It works like a fitness app: user sets a daily word count goal, and failure to m
 
 ##To run:
 
-In the wrn-api folder:
+In the wrn-api directory:
 
 1. `bundle install`
 
 2. `bundle exec bin/rails server`
 
-In the wrn-angular folder:
+In the wrn-angular directory:
 
 1. Run `grunt` for building.
 
