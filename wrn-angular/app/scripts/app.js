@@ -35,11 +35,9 @@ app.config(['ChartJsProvider', function (ChartJsProvider) {
     ChartJsProvider.setOptions({
       // responsive: false,
       bezierCurve : false,
+      scaleBeginAtZero: true
     });
-    // Configure all line charts
-    ChartJsProvider.setOptions('Line', {
-      // datasetFill: false
-    });
+    // Configure all donut charts
     ChartJsProvider.setOptions('Doughnut',{
       percentageInnerCutout : 75,
     });
