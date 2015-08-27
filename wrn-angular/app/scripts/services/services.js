@@ -9,10 +9,14 @@ app.factory('EntryService', ['$resource', function($resource){
 }]);
 
 app.factory('UserService', ['$resource', function($resource){
-  return $resource('http://localhost:3000/api/users', {}, {
+  return {
+    users: $resource('http://localhost:3000/api/users', {}, {
     save: {method: 'POST', cache: false, isArray: false},
+  }),
+    user: $resource('http://localhost:3000/api/user', {}, {
     update: {method: 'PUT', cache: false, isArray: false},
-  });
+  }) 
+  }
 }]);
 
 app.factory('SessionService', ['$resource', function($resource){
@@ -43,6 +47,7 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     var i = 0;
       do {
         if (days[i].entry && days[i].entry.id == entry.id){
+          entry.progress = Math.round(entry.word_count/entry.goal*100);
           days[i].entry = entry;
         }
         i ++;
@@ -70,9 +75,9 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
     },
     getEntry: EntryService.getEntry,
     saveEntry: function(entry){
-      EntryService.update({id: entry.id}, {entry: entry},
+      lsUpdateEntry(entry);
+      EntryService.update({id: entry.id},{entry: entry},
         function success(rsp){
-          console.log('Success', rsp );
           rsp.forEach(function(el, i, arr){
             lsUpdateEntry(el);
           });
@@ -82,7 +87,14 @@ app.factory('Data', ['EntryService', 'UserService', 'localStorageService', 'Stat
       });
     },
     updateUser: function(user){
-      // localStorageService.set('user', user);
+      localStorageService.set('user', user);
+      UserService.user.update({user: user},
+        function success(rsp){
+          console.log('user updated' + JSON.stringify(rsp));
+        },
+        function error(rsp){
+          console.log('Error' + JSON.stringify(rsp) );
+        });
     }
   };
 

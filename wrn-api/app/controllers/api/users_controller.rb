@@ -19,7 +19,7 @@ class Api::UsersController < ApplicationController
 
   def update
     if current_user.update_attributes(user_params)
-      render json: current_user
+      render json: current_user.as_json(only: [:name, :email, :goal, :token]), status: 200
     else
       render json: @user.errors
     end

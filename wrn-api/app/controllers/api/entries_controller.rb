@@ -3,14 +3,13 @@ class Api::EntriesController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @entries = current_user.entries
+    @entries = current_user.entries.order(:created_at)
     @entries.where(word_count: 0).delete_all
     Entry.create(user: current_user) if @entries.empty?
     # TODO: time zone
     @entries << Entry.create(user: current_user) if @entries.last.created_at.to_date < Date.today
-    Entry.set_lock(@entries)
+    @entries = Entry.set_lock(@entries)
     render json: @entries.as_json(only: [:id, :created_at, :preview, :word_count, :goal, :locked]), status: 200
-  
   end
 
   def show
@@ -19,7 +18,7 @@ class Api::EntriesController < ApplicationController
     if @entry && !@entry.locked
       render json: @entry
     else
-      render nothing: true, status: 401
+      render json: {error: 'You are not authorized to access this entry.'}, status: 401
     end
   end
 

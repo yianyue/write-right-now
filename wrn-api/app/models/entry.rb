@@ -24,6 +24,7 @@ class Entry < ActiveRecord::Base
   end
 
   def set_default
+    # TODO: update_attributes
     self.goal = self.user.goal
     self.content = self.content || ''
     self.word_count = 0
@@ -41,12 +42,11 @@ class Entry < ActiveRecord::Base
 
     if num_lock > 0
       (0...num_lock).each{ |i|
-        entries[i].locked = true
-        entries[i].save
+        entries[i].update_columns(locked: true)
       }
     end
-    # return entries
-    return [entries[num_lock-1], entries[num_lock]]
+    return entries
+    # return [entries[num_lock-1], entries[num_lock]]
   end
   
 end
