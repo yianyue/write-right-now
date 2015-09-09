@@ -1,6 +1,6 @@
 # Write Right Now
 
-[Demo on Heroku](http://writerightnow.herokuapp.com/)
+##[Demo on Heroku](http://writerightnow.herokuapp.com/)
 
 Distraction-free writing app that motivates users to meet their writing goal.
 
