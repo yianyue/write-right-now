@@ -1,6 +1,6 @@
 # Write Right Now
 
-##[Demo on Heroku](http://writerightnow.herokuapp.com/)
+## [Demo on Heroku](http://writerightnow.herokuapp.com/)
 
 Distraction-free writing app that motivates users to meet their writing goal.
 
@@ -8,7 +8,7 @@ It works like a fitness app: user sets a daily word count goal, and failure to m
 
 (Well, not really. The app'll just lock away an entry for every day that the user skipped. Relax.)
 
-##Key Features:
+## Key Features:
 
 - Minimalistic writing interface
 
@@ -17,7 +17,7 @@ It works like a fitness app: user sets a daily word count goal, and failure to m
 - Dashboard of writing statistics with rich graphics
 
 
-##To run:
+## To run:
 
 In the wrn-api directory:
 
